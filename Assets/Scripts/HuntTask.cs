@@ -15,6 +15,7 @@ public class HuntTask
     public TaskField Field { get; set; }
 
     public string Title => $"{GetTaskName()} in {AddColors(GetTarget())}";
+    public string CountryLetters => country;
 
     private string AddColors(string text)
     {

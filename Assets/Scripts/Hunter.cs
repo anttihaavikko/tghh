@@ -7,13 +7,23 @@ public class Hunter : MonoBehaviour
 {
     [SerializeField] private Appearer plane;
     [SerializeField] private Animator anim;
+    [SerializeField] private SpeechBubble bubble;
     
     private static readonly int HopAnim = Animator.StringToHash("hop");
+    private static readonly int ReadAnim = Animator.StringToHash("reading");
+    private static readonly int Joy = Animator.StringToHash("joy");
 
-    public void HopAround(int count)
+    public SpeechBubble Bubble => bubble;
+
+    public void HopAround(int count, bool win)
     {
-        for (var i = 0; i < count; i++)
+        for (var i = 0; i < (win ? count + 1 : count); i++)
         {
+            if (win && i == count - 1)
+            {
+                this.StartCoroutine(() => anim.SetTrigger(Joy), i * 0.8f);
+                continue;
+            }
             var target = i < count - 1 ? Vector3.zero.RandomOffset(0.3f) : Vector3.zero;
             this.StartCoroutine(() => HopTo(target), i * 0.8f);
         }
@@ -55,5 +65,10 @@ public class Hunter : MonoBehaviour
     public void Land()
     {
         plane.Hide();
+    }
+
+    public void Read(bool state)
+    {
+        anim.SetBool(ReadAnim, state);
     }
 }

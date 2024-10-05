@@ -15,6 +15,7 @@ public class Book : MonoBehaviour
     private Hunt hunt;
 
     public bool IsShown { get; private set; }
+    public string FirstTaskLetters => hunt.Tasks[0].CountryLetters;
 
     public void Init(List<Country> countries, int level)
     {

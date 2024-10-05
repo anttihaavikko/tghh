@@ -27,6 +27,7 @@ public class World : MonoBehaviour
     private bool inCapital;
     private int level;
     private bool wasBookShown;
+    private bool started;
 
     private void Start()
     {
@@ -37,8 +38,8 @@ public class World : MonoBehaviour
         this.StartCoroutine(() => physicsDecorations.SetParent(null), 0.25f);
         
         book.Init(countries, level);
-        ShowMenu(hunter.transform.position);
-        book.Show();
+        
+        hunter.Bubble.Show("Time to do some (hunting)! Where did I put that (notebook) of mine...");
     }
 
     private void NextLevel()
@@ -55,6 +56,16 @@ public class World : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) SetTarget();
         if (DevKey.Down(KeyCode.F)) FlyMode();
         if (DevKey.Down(KeyCode.N)) NextLevel();
+
+        if (Input.anyKeyDown && !started)
+        {
+            started = true;
+            var letters = book.FirstTaskLetters;
+            hunter.Read(true);
+            hunter.Bubble.Show($"I should start with that (tracking task) first. Gotta fly to a (country) with ({letters[0]} and {letters[1]}) in the (name) to do it.");
+            this.StartCoroutine(() => book.Show(), 0.4f);
+            this.StartCoroutine(() => ShowMenu(hunter.transform.position), 0.8f);
+        }
     }
 
     public void CancelFlyMode()
@@ -70,6 +81,7 @@ public class World : MonoBehaviour
 
     public void FlyMode()
     {
+        hunter.Read(false);
         cancelButton.gameObject.SetActive(true);
         wasBookShown = book.IsShown;
         if(wasBookShown) book.Hide();
@@ -87,15 +99,18 @@ public class World : MonoBehaviour
 
     public void FindTrack()
     {
+        hunter.Read(true);
+        
         huntCam.SetActive(true);
         menu.Hide();
         info.Hide();
-        
-        hunter.HopAround(4);
+
+        var success = TryComplete(TaskType.Track, 5);
+        hunter.HopAround(4, success);
         
         this.StartCoroutine(() =>
         {
-            if (TryComplete(TaskType.Track, 5))
+            if (success)
             {
                 info.ShowWithText("Found the track!", 0);    
             }
@@ -123,15 +138,16 @@ public class World : MonoBehaviour
 
     public void Hunt()
     {
+        hunter.Read(false);
         huntCam.SetActive(true);
         menu.Hide();
         info.Hide();
         
-        hunter.HopAround(4);
+        var success = book.CanHunt(current);
+        hunter.HopAround(4, success);
         
         this.StartCoroutine(() =>
         {
-            var success = book.CanHunt(current);
             if (success)
             {
                 book.Complete(TaskType.Hunt);
