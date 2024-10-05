@@ -145,7 +145,7 @@ public class World : MonoBehaviour
         if (!hit.Any()) return;
         flying = false;
         var distance = Vector3.Distance(mp, hunter.transform.position);
-        var delay = 0.3f * distance;
+        var delay = Mathf.Max(1.2f, 0.3f * distance);
         Tweener.MoveToQuad(hunter.transform, mp, delay);
         var landed = hit.Select(h => h.GetComponent<Country>()).Where(c => c != null).ToList();
         var closest = landed.OrderBy(c => Vector3.Distance(mp, c.CapitalPosition)).First();
