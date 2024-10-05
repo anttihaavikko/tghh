@@ -1,6 +1,8 @@
 using System;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Utils;
+using AnttiStarterKit.Visuals;
 using UnityEngine;
 
 public class Hunter : MonoBehaviour
@@ -8,6 +10,9 @@ public class Hunter : MonoBehaviour
     [SerializeField] private Appearer plane;
     [SerializeField] private Animator anim;
     [SerializeField] private SpeechBubble bubble;
+    [SerializeField] private ParticleSystem confetti;
+    [SerializeField] private EffectCamera effectCamera;
+    [SerializeField] private GameObject planeTrail;
     
     private static readonly int HopAnim = Animator.StringToHash("hop");
     private static readonly int ReadAnim = Animator.StringToHash("reading");
@@ -29,6 +34,17 @@ public class Hunter : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (DevKey.Down(KeyCode.W)) anim.SetTrigger(Joy);
+    }
+
+    public void ShootConfetti()
+    {
+        effectCamera.BaseEffect(0.3f);
+        confetti.Play();
+    }
+
     public void HopTo(Vector3 pos)
     {
         this.StartCoroutine(() => Tweener.MoveLocalToQuad(anim.transform, pos, 0.4f), 0.1f);
@@ -42,6 +58,8 @@ public class Hunter : MonoBehaviour
 
     public void Lift(Vector3 target)
     {
+        planeTrail.SetActive(true);
+        
         Hop();
         
         var dir = target - transform.position;
@@ -65,6 +83,7 @@ public class Hunter : MonoBehaviour
     public void Land()
     {
         plane.Hide();
+        this.StartCoroutine(() => planeTrail.SetActive(false), 3f);
     }
 
     public void Read(bool state)
