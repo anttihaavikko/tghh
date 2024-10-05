@@ -10,14 +10,19 @@ public class Menu : MonoBehaviour
     
     public void Show(Book book, Country country, bool inCapital, bool flip)
     {
+        buttons[1].gameObject.SetActive(inCapital);
         buttons[2].gameObject.SetActive(false); // bribe
-        buttons[3].gameObject.SetActive(book.HasUncompleted(TaskType.Trap));
+        buttons[3].gameObject.SetActive(inCapital && book.HasUncompleted(TaskType.Trap) && country != null && book.CanComplete(TaskType.Trap, country));
         buttons[4].gameObject.SetActive(false); // sell
         buttons[5].gameObject.SetActive(book.HasUncompleted(TaskType.Track));
         
         // flipper.localScale = panel.localScale = new Vector3(flip ? -1 : 1, 1, 1);
         appearer.Show();
-        // Debug.Log(inCapital ? $"In {country.CapitalName}, {country.name}" : $"In {country.name}");
+    }
+
+    public void HideButton(int index)
+    {
+        buttons[index].gameObject.SetActive(false);
     }
 
     public void Hide()

@@ -8,8 +8,9 @@ public class Hunt
     {
         Tasks = new List<HuntTask>
         {
-            new(TaskType.Track, countries, 2),
-            new(TaskType.Hunt, countries, 2)
+            new(TaskType.Track, countries, 2, 0),
+            new(TaskType.Trap, countries, 0, 3),
+            new(TaskType.Hunt, countries, 2, 3)
         };
     }
 }

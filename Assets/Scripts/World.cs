@@ -52,7 +52,7 @@ public class World : MonoBehaviour
 
     public void BuyTrap()
     {
-        TryComplete(TaskType.Trap);
+        TryComplete(TaskType.Trap, 3);
     }
 
     public void FindTrack()
@@ -63,7 +63,7 @@ public class World : MonoBehaviour
         
         this.StartCoroutine(() =>
         {
-            if (TryComplete(TaskType.Track))
+            if (TryComplete(TaskType.Track, 5))
             {
                 info.ShowWithText("Found the track!", 0);    
             }
@@ -77,11 +77,12 @@ public class World : MonoBehaviour
         }, 2f);
     }
 
-    private bool TryComplete(TaskType type)
+    private bool TryComplete(TaskType type, int buttonIndex)
     {
         if (book.CanComplete(type, current))
         {
             book.Complete(type);
+            menu.HideButton(buttonIndex);
             return true;
         }
 
