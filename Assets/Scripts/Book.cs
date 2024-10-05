@@ -35,6 +35,7 @@ public class Book : MonoBehaviour
 
     public bool CanComplete(TaskType type, Country country)
     {
-        return hunt.Tasks.Find(t => t.Is(type)).FilledBy(country);
+        var match = hunt.Tasks.Find(t => t.Is(type));
+        return match != default && match.FilledBy(country);
     }
 }

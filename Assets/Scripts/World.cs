@@ -26,6 +26,10 @@ public class World : MonoBehaviour
 
     private void Start()
     {
+        current = countries.Random();
+        current.Show();
+        hunter.transform.position = current.CapitalPosition;
+        
         book.Init(countries);
         ShowMenu(hunter.transform.position);
     }
@@ -53,15 +57,31 @@ public class World : MonoBehaviour
 
     public void FindTrack()
     {
-        TryComplete(TaskType.Track);
+        huntCam.SetActive(true);
+        menu.Hide();
+        info.Hide();
+        
+        this.StartCoroutine(() =>
+        {
+            TryComplete(TaskType.Track);
+            this.StartCoroutine(() =>
+            {
+                info.Hide();
+                menu.Show(book, current, inCapital, isMenuFlipped);
+                huntCam.SetActive(false);
+            }, 1.5f);
+        }, 2f);
     }
 
-    private void TryComplete(TaskType type)
+    private bool TryComplete(TaskType type)
     {
         if (book.CanComplete(type, current))
         {
             book.Complete(type);
+            return true;
         }
+
+        return false;
     }
 
     public void Hunt()
@@ -117,9 +137,9 @@ public class World : MonoBehaviour
         var flipped = inCapital && mp.x - closest.CapitalPosition.x > 0;
         this.StartCoroutine(() =>
         {
-            ShowMenu(inCapital ? closest.CapitalPosition : hunter.transform.position, closest, flipped);
             route.gameObject.SetActive(false);
             info.ShowWithText(inCapital ? $"Landed in {closest.name.ToUpper()}!" : "Landed in some UNKNOWN LAND...\n<size=50>No cities nearby...</size>", 0.3f);
+            this.StartCoroutine(() => ShowMenu(inCapital ? closest.CapitalPosition : hunter.transform.position, closest, flipped), 0.5f);
         }, delay);
         
         if (inCapital)
