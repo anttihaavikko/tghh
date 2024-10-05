@@ -20,11 +20,11 @@ public class World : MonoBehaviour
     private void SetTarget()
     {
         var mp = cam.ScreenToWorldPoint(Input.mousePosition).WhereZ(0);
-        var hit = Physics2D.OverlapCircleAll(mp, 0.2f, countryMask);
+        var hit = Physics2D.OverlapCircleAll(mp, 0.1f, countryMask);
         if (!hit.Any()) return;
         var distance = Vector3.Distance(mp, hunter.transform.position);
         Tweener.MoveToQuad(hunter.transform, mp, 0.3f * distance);
         var landed = hit.Select(h => h.GetComponent<Country>()).Where(c => c != null).ToList();
-        Debug.Log($"Hit in {string.Join(", ", landed.Select(c => c.name))}");
+        Debug.Log(string.Join(", ", landed.Select(c => c.name)));
     }
 }
