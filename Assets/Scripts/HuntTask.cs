@@ -34,7 +34,7 @@ public class HuntTask
 
     private static string GetLetters(int amount, string name)
     {
-        return string.Join(string.Empty, name.ToCharArray().Where(l => l.ToString() != " ").OrderBy(_ => Random.value).Take(amount));
+        return string.Join(string.Empty, name.ToCharArray().Distinct().Where(l => l.ToString() != " ").OrderBy(_ => Random.value).Take(amount));
     }
 
     public bool FilledBy(Country candidate)

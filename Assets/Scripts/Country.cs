@@ -14,6 +14,8 @@ public class Country : MonoBehaviour
     public string CapitalName => capitalName;
     public Vector3 CapitalPosition => capital.position;
 
+    public bool Visited { get; private set; }
+
     private void Start()
     {
         capitalNameField.text = capitalNameOutline.text = capitalName;
@@ -21,6 +23,7 @@ public class Country : MonoBehaviour
 
     public void Show()
     {
+        Visited = true;
         capitalText.ShowAfter(0.2f);
         capitalTap.Show();
     }

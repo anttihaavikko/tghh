@@ -63,7 +63,11 @@ public class World : MonoBehaviour
         
         this.StartCoroutine(() =>
         {
-            TryComplete(TaskType.Track);
+            if (TryComplete(TaskType.Track))
+            {
+                info.ShowWithText("Found the track!", 0);    
+            }
+            
             this.StartCoroutine(() =>
             {
                 info.Hide();
@@ -138,15 +142,16 @@ public class World : MonoBehaviour
         this.StartCoroutine(() =>
         {
             route.gameObject.SetActive(false);
-            info.ShowWithText(inCapital ? $"Landed in {closest.name.ToUpper()}!" : "Landed in some UNKNOWN LAND...\n<size=50>No cities nearby...</size>", 0.3f);
+            info.ShowWithText(inCapital || closest.Visited ? $"Landed in {closest.name.ToUpper()}!" : "Landed in some UNKNOWN LAND...\n<size=50>No cities nearby...</size>", 0.3f);
             this.StartCoroutine(() => ShowMenu(inCapital ? closest.CapitalPosition : hunter.transform.position, closest, flipped), 0.5f);
         }, delay);
         
         if (inCapital)
         {
             this.StartCoroutine(() => closest.Show(), delay);
-            current = closest;
         }
+        
+        current = closest;
     }
 
     private void ShowMenu(Vector3 pos, Country country = null, bool flip = false)
