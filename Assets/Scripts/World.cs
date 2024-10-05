@@ -16,6 +16,8 @@ public class World : MonoBehaviour
     [SerializeField] private Menu menu;
     [SerializeField] private GameObject huntCam;
     [SerializeField] private LineRenderer route;
+    [SerializeField] private Book book;
+    [SerializeField] private Appearer info;
 
     private Country current;
     private bool flying;
@@ -24,6 +26,7 @@ public class World : MonoBehaviour
 
     private void Start()
     {
+        book.Init(countries);
         ShowMenu(hunter.transform.position);
     }
 
@@ -36,20 +39,48 @@ public class World : MonoBehaviour
 
     public void FlyMode()
     {
+        info.ShowWithText("Pick flight target!", 0);
         route.gameObject.SetActive(true);
         menu.Hide();
         zoomCam.SetActive(false);
         flying = true;
     }
 
+    public void BuyTrap()
+    {
+        TryComplete(TaskType.Trap);
+    }
+
+    public void FindTrack()
+    {
+        TryComplete(TaskType.Track);
+    }
+
+    private void TryComplete(TaskType type)
+    {
+        if (book.CanComplete(type, current))
+        {
+            book.Complete(type);
+        }
+    }
+
     public void Hunt()
     {
         huntCam.SetActive(true);
         menu.Hide();
+        info.Hide();
+        
         this.StartCoroutine(() =>
         {
-            menu.Show(current, inCapital, isMenuFlipped);
-            huntCam.SetActive(false);
+            var success = book.CanHunt(current);
+            if(success) book.Complete(TaskType.Hunt);
+            info.ShowWithText(success ? "Successfully hunted X!" : "You didn't find anything...", 0);
+            this.StartCoroutine(() =>
+            {
+                info.Hide();
+                menu.Show(book, current, inCapital, isMenuFlipped);
+                huntCam.SetActive(false);
+            }, 1.5f);
         }, 2f);
     }
 
@@ -64,6 +95,7 @@ public class World : MonoBehaviour
     private void SetTarget()
     {
         if (!flying) return;
+        info.Hide();
         var mp = cam.ScreenToWorldPoint(Input.mousePosition).WhereZ(0);
         var hit = Physics2D.OverlapCircleAll(mp, 0.1f, countryMask);
         if (!hit.Any()) return;
@@ -87,6 +119,7 @@ public class World : MonoBehaviour
         {
             ShowMenu(inCapital ? closest.CapitalPosition : hunter.transform.position, closest, flipped);
             route.gameObject.SetActive(false);
+            info.ShowWithText(inCapital ? $"Landed in {closest.name.ToUpper()}!" : "Landed in some UNKNOWN LAND...\n<size=50>No cities nearby...</size>", 0.3f);
         }, delay);
         
         if (inCapital)
@@ -100,6 +133,6 @@ public class World : MonoBehaviour
     {
         isMenuFlipped = flip;
         menu.transform.position = pos;
-        menu.Show(country, inCapital, flip);
+        menu.Show(book, country, inCapital, flip);
     }
 }
