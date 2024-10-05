@@ -14,8 +14,16 @@ public class HuntTask
     public bool IsDone { get; private set; }
     public TaskField Field { get; set; }
 
-    public string Title => $"{GetTaskName()} in {GetTarget()}";
-    
+    public string Title => $"{GetTaskName()} in {AddColors(GetTarget())}";
+
+    private string AddColors(string text)
+    {
+        return text.Replace("(", "<color=red>")
+            .Replace(")", "</color>")
+            .Replace("[", "<color=#000><size=20>")
+            .Replace("]", "</size></color>");
+    }
+
     public HuntTask(TaskType taskType, List<Country> countries, int countryLetters, int cityLetters)
     {
         type = taskType;
@@ -27,8 +35,8 @@ public class HuntTask
 
     private string GetTarget()
     {
-        if (country.Length > 0 && city.Length > 0) return $"country/city {country}/{city}";
-        return city.Length > 0 ? $"city {city}" : $"country {country}";
+        if (country.Length > 0 && city.Length > 0) return $"[country/city] ({country})[/]({city})";
+        return city.Length > 0 ? $"[city] ({city})" : $"[country] ({country})";
     }
 
     private string GetTaskName()

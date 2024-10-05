@@ -8,9 +8,9 @@ public class Book : MonoBehaviour
     
     private Hunt hunt;
 
-    public void Init(List<Country> countries)
+    public void Init(List<Country> countries, int level)
     {
-        hunt = new Hunt(countries);
+        hunt = new Hunt(countries, level);
         tasks.ForEach(t =>
         {
             var index = tasks.IndexOf(t);

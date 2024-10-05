@@ -23,6 +23,7 @@ public class World : MonoBehaviour
     private bool flying;
     private bool isMenuFlipped;
     private bool inCapital;
+    private int level;
 
     private void Start()
     {
@@ -30,7 +31,14 @@ public class World : MonoBehaviour
         current.Show();
         hunter.transform.position = current.CapitalPosition;
         
-        book.Init(countries);
+        book.Init(countries, level);
+        ShowMenu(hunter.transform.position);
+    }
+
+    private void NextLevel()
+    {
+        level++;
+        book.Init(countries, level);
         ShowMenu(hunter.transform.position);
     }
 
@@ -39,6 +47,7 @@ public class World : MonoBehaviour
         UpdateRoute();
         if (Input.GetMouseButtonDown(0)) SetTarget();
         if (DevKey.Down(KeyCode.F)) FlyMode();
+        if (DevKey.Down(KeyCode.N)) NextLevel();
     }
 
     public void FlyMode()
