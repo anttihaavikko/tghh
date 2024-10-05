@@ -30,7 +30,7 @@ public class World : MonoBehaviour
     {
         current = countries.Random();
         current.Show();
-        hunter.transform.position = current.CapitalPosition;
+        // hunter.transform.position = current.CapitalPosition;
         
         book.Init(countries, level);
         ShowMenu(hunter.transform.position);
