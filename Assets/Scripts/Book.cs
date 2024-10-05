@@ -10,6 +10,7 @@ public class Book : MonoBehaviour
     [SerializeField] private List<TaskField> tasks;
     [SerializeField] private Transform onPosition, offPosition;
     [SerializeField] private TMP_Text reminder;
+    [SerializeField] private Transform arrow;
     
     private Hunt hunt;
 
@@ -60,6 +61,7 @@ public class Book : MonoBehaviour
         IsShown = true;
         Tweener.MoveToBounceOut(transform, onPosition.position, 0.2f);
         reminder.gameObject.SetActive(false);
+        arrow.localScale = new Vector3(1, 1, 1);
     }
 
     public void Hide()
@@ -67,6 +69,7 @@ public class Book : MonoBehaviour
         IsShown = false;
         Tweener.MoveToBounceOut(transform, offPosition.position, 0.2f);
         this.StartCoroutine(() => reminder.gameObject.SetActive(true), 0.15f);
+        arrow.localScale = new Vector3(1, -1, 1);
     }
 
     public void Toggle()

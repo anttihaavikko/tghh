@@ -19,6 +19,7 @@ public class World : MonoBehaviour
     [SerializeField] private Book book;
     [SerializeField] private Appearer info;
     [SerializeField] private Transform physicsDecorations;
+    [SerializeField] private ButtonStyle cancelButton;
 
     private Country current;
     private bool flying;
@@ -56,8 +57,20 @@ public class World : MonoBehaviour
         if (DevKey.Down(KeyCode.N)) NextLevel();
     }
 
+    public void CancelFlyMode()
+    {
+        cancelButton.Reset();
+        cancelButton.gameObject.SetActive(false);
+        flying = false;
+        if(wasBookShown) book.Show();
+        route.gameObject.SetActive(false);
+        menu.Show(book, current, inCapital, isMenuFlipped);
+        zoomCam.SetActive(true);
+    }
+
     public void FlyMode()
     {
+        cancelButton.gameObject.SetActive(true);
         wasBookShown = book.IsShown;
         if(wasBookShown) book.Hide();
         info.ShowWithText("Pick flight target!", 0);
@@ -145,7 +158,8 @@ public class World : MonoBehaviour
     
     private void SetTarget()
     {
-        if (!flying) return;
+        if (!flying || cancelButton.IsHovered) return;
+        cancelButton.gameObject.SetActive(false);
         info.Hide();
         var mp = cam.ScreenToWorldPoint(Input.mousePosition).WhereZ(0);
         var hit = Physics2D.OverlapCircleAll(mp, 0.1f, countryMask);

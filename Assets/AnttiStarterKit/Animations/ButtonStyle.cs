@@ -35,6 +35,8 @@ namespace AnttiStarterKit.Animations
 
         private Camera cam;
 
+        public bool IsHovered { get; set; }
+
         private void Start()
         {
             originalScale = transform.localScale;
@@ -49,6 +51,7 @@ namespace AnttiStarterKit.Animations
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            IsHovered = true;
             ApplyScaling(scaleAmount, TweenEasings.BounceEaseOut);
             ApplyRotation(Random.Range(-rotationAmount, rotationAmount), TweenEasings.BounceEaseOut);
             ApplyColors(backColors.Random(), frontColors.Random());
@@ -106,6 +109,7 @@ namespace AnttiStarterKit.Animations
 
         public void Reset()
         {
+            IsHovered = false;
             ApplyScaling(0, TweenEasings.BounceEaseOut);
             ApplyRotation(0, TweenEasings.BounceEaseOut);
             ApplyColors(originalBackColor, originalFrontColor);
