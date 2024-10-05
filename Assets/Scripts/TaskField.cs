@@ -17,4 +17,9 @@ public class TaskField : MonoBehaviour
     {
         check.Show();
     }
+
+    public void Reset()
+    {
+        check.Hide();
+    }
 }

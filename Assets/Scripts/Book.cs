@@ -1,18 +1,25 @@
 using System.Collections.Generic;
 using System.Linq;
+using AnttiStarterKit.Animations;
+using AnttiStarterKit.Extensions;
+using TMPro;
 using UnityEngine;
 
 public class Book : MonoBehaviour
 {
     [SerializeField] private List<TaskField> tasks;
+    [SerializeField] private Transform onPosition, offPosition;
+    [SerializeField] private TMP_Text reminder;
     
     private Hunt hunt;
+    private bool shown;
 
     public void Init(List<Country> countries, int level)
     {
         hunt = new Hunt(countries, level);
         tasks.ForEach(t =>
         {
+            t.Reset();
             var index = tasks.IndexOf(t);
             var exists = hunt.Tasks.Count > index;
             t.gameObject.SetActive(exists);
@@ -21,6 +28,8 @@ public class Book : MonoBehaviour
                 t.Init(hunt.Tasks[index]);
             }
         });
+        
+        UpdateReminder();
     }
 
     public bool CanHunt(Country country)
@@ -31,6 +40,7 @@ public class Book : MonoBehaviour
     public void Complete(TaskType taskType)
     {
         hunt.Tasks.Where(t => t.Is(taskType)).ToList().ForEach(t => t.Complete());
+        UpdateReminder();
     }
 
     public bool CanComplete(TaskType type, Country country)
@@ -42,5 +52,36 @@ public class Book : MonoBehaviour
     public bool HasUncompleted(TaskType type)
     {
         return hunt.Tasks.Any(t => t.Is(type) && !t.IsDone);
+    }
+
+    public void Show()
+    {
+        shown = true;
+        Tweener.MoveToBounceOut(transform, onPosition.position, 0.2f);
+        reminder.gameObject.SetActive(false);
+    }
+
+    public void Hide()
+    {
+        shown = false;
+        Tweener.MoveToBounceOut(transform, offPosition.position, 0.2f);
+        this.StartCoroutine(() => reminder.gameObject.SetActive(true), 0.15f);
+    }
+
+    public void Toggle()
+    {
+        if (shown)
+        {
+            Hide();
+            return;
+        }
+        
+        Show();
+    }
+
+    private void UpdateReminder()
+    {
+        var first = hunt.Tasks.FirstOrDefault(t => !t.IsDone);
+        reminder.text = first != default ? first.Title : "";
     }
 }

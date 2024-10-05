@@ -20,8 +20,8 @@ public class HuntTask
     {
         return text.Replace("(", "<color=red>")
             .Replace(")", "</color>")
-            .Replace("[", "<color=#000><size=20>")
-            .Replace("]", "</size></color>");
+            .Replace("[", "<size=20>")
+            .Replace("]", "</size>");
     }
 
     public HuntTask(TaskType taskType, List<Country> countries, int countryLetters, int cityLetters)

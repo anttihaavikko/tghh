@@ -33,12 +33,14 @@ public class World : MonoBehaviour
         
         book.Init(countries, level);
         ShowMenu(hunter.transform.position);
+        book.Show();
     }
 
     private void NextLevel()
     {
         level++;
         book.Init(countries, level);
+        book.Show();
         ShowMenu(hunter.transform.position);
     }
 
@@ -107,7 +109,12 @@ public class World : MonoBehaviour
         this.StartCoroutine(() =>
         {
             var success = book.CanHunt(current);
-            if(success) book.Complete(TaskType.Hunt);
+            if (success)
+            {
+                book.Complete(TaskType.Hunt);
+                this.StartCoroutine(() => book.Hide(), 0.7f);
+                this.StartCoroutine(NextLevel, 1.2f);
+            }
             info.ShowWithText(success ? "Successfully hunted X!" : "You didn't find anything...", 0);
             this.StartCoroutine(() =>
             {
