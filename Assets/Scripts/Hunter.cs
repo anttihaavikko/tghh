@@ -10,6 +10,21 @@ public class Hunter : MonoBehaviour
     
     private static readonly int HopAnim = Animator.StringToHash("hop");
 
+    public void HopAround(int count)
+    {
+        for (var i = 0; i < count; i++)
+        {
+            var target = i < count - 1 ? Vector3.zero.RandomOffset(0.3f) : Vector3.zero;
+            this.StartCoroutine(() => HopTo(target), i * 0.8f);
+        }
+    }
+
+    public void HopTo(Vector3 pos)
+    {
+        this.StartCoroutine(() => Tweener.MoveLocalToQuad(anim.transform, pos, 0.4f), 0.1f);
+        Hop();
+    }
+
     public void Hop()
     {
         anim.SetTrigger(HopAnim);

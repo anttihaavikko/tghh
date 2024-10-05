@@ -75,6 +75,8 @@ public class World : MonoBehaviour
         menu.Hide();
         info.Hide();
         
+        hunter.HopAround(4);
+        
         this.StartCoroutine(() =>
         {
             if (TryComplete(TaskType.Track, 5))
@@ -108,6 +110,8 @@ public class World : MonoBehaviour
         huntCam.SetActive(true);
         menu.Hide();
         info.Hide();
+        
+        hunter.HopAround(4);
         
         this.StartCoroutine(() =>
         {
