@@ -12,6 +12,8 @@ public class World : MonoBehaviour
     [SerializeField] private LayerMask countryMask;
     [SerializeField] private Camera cam;
 
+    private Country current;
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) SetTarget();
@@ -23,8 +25,20 @@ public class World : MonoBehaviour
         var hit = Physics2D.OverlapCircleAll(mp, 0.1f, countryMask);
         if (!hit.Any()) return;
         var distance = Vector3.Distance(mp, hunter.transform.position);
-        Tweener.MoveToQuad(hunter.transform, mp, 0.3f * distance);
+        var delay = 0.3f * distance;
+        Tweener.MoveToQuad(hunter.transform, mp, delay);
         var landed = hit.Select(h => h.GetComponent<Country>()).Where(c => c != null).ToList();
-        Debug.Log(string.Join(", ", landed.Select(c => c.name)));
+        var closest = landed.OrderBy(c => Vector3.Distance(mp, c.CapitalPosition)).First();
+        
+        if (current)
+        {
+            current.Hide();
+        }
+        
+        if (Vector3.Distance(mp, closest.CapitalPosition) < 0.5f)
+        {
+            this.StartCoroutine(() => closest.Show(), delay);
+            current = closest;
+        }
     }
 }
