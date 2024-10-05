@@ -38,4 +38,9 @@ public class Book : MonoBehaviour
         var match = hunt.Tasks.Find(t => t.Is(type));
         return match != default && match.FilledBy(country);
     }
+
+    public bool HasUncompleted(TaskType type)
+    {
+        return hunt.Tasks.Any(t => t.Is(type) && !t.IsDone);
+    }
 }

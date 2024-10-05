@@ -142,6 +142,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 185316696943350932, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
+      propertyPath: price
+      value: 
+      objectReference: {fileID: 1794072126}
     - target: {fileID: 7928942227317443041, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -180,7 +184,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7928942227317443042, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7928942227317443042, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
       propertyPath: m_SizeDelta.y
@@ -236,7 +240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7928942227317443043, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
       propertyPath: m_Name
-      value: Refuel
+      value: Button Price Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7928942227453630283, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
       propertyPath: m_text
