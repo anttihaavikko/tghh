@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Utils;
 using UnityEngine;
 
 public class World : MonoBehaviour
@@ -11,12 +12,14 @@ public class World : MonoBehaviour
     [SerializeField] private List<Country> countries;
     [SerializeField] private LayerMask countryMask;
     [SerializeField] private Camera cam;
+    [SerializeField] private GameObject zoomCam;
 
     private Country current;
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0)) SetTarget();
+        if(DevKey.Down(KeyCode.F)) zoomCam.SetActive(false);
     }
     
     private void SetTarget()
@@ -29,6 +32,8 @@ public class World : MonoBehaviour
         Tweener.MoveToQuad(hunter.transform, mp, delay);
         var landed = hit.Select(h => h.GetComponent<Country>()).Where(c => c != null).ToList();
         var closest = landed.OrderBy(c => Vector3.Distance(mp, c.CapitalPosition)).First();
+        
+        zoomCam.SetActive(true);
         
         if (current)
         {
