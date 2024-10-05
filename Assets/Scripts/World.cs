@@ -24,6 +24,7 @@ public class World : MonoBehaviour
     private bool isMenuFlipped;
     private bool inCapital;
     private int level;
+    private bool wasBookShown;
 
     private void Start()
     {
@@ -54,6 +55,8 @@ public class World : MonoBehaviour
 
     public void FlyMode()
     {
+        wasBookShown = book.IsShown;
+        if(wasBookShown) book.Hide();
         info.ShowWithText("Pick flight target!", 0);
         route.gameObject.SetActive(true);
         menu.Hide();
@@ -148,6 +151,10 @@ public class World : MonoBehaviour
         var closest = landed.OrderBy(c => Vector3.Distance(mp, c.CapitalPosition)).First();
         
         zoomCam.SetActive(true);
+        hunter.Lift(mp);
+        
+        hunter.ScaleUp(delay * 0.3f);
+        this.StartCoroutine(() => hunter.ScaleDown(delay * 0.3f), delay * 0.7f);
         
         if (current)
         {
@@ -158,6 +165,9 @@ public class World : MonoBehaviour
         var flipped = inCapital && mp.x - closest.CapitalPosition.x > 0;
         this.StartCoroutine(() =>
         {
+            if(wasBookShown) book.Show();
+            hunter.Land();
+            
             route.gameObject.SetActive(false);
             info.ShowWithText(inCapital || closest.Visited ? $"Landed in {closest.name.ToUpper()}!" : "Landed in some UNKNOWN LAND...\n<size=50>No cities nearby...</size>", 0.3f);
             this.StartCoroutine(() => ShowMenu(inCapital ? closest.CapitalPosition : hunter.transform.position, closest, flipped), 0.5f);

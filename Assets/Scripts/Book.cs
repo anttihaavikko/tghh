@@ -12,7 +12,8 @@ public class Book : MonoBehaviour
     [SerializeField] private TMP_Text reminder;
     
     private Hunt hunt;
-    private bool shown;
+
+    public bool IsShown { get; private set; }
 
     public void Init(List<Country> countries, int level)
     {
@@ -56,21 +57,21 @@ public class Book : MonoBehaviour
 
     public void Show()
     {
-        shown = true;
+        IsShown = true;
         Tweener.MoveToBounceOut(transform, onPosition.position, 0.2f);
         reminder.gameObject.SetActive(false);
     }
 
     public void Hide()
     {
-        shown = false;
+        IsShown = false;
         Tweener.MoveToBounceOut(transform, offPosition.position, 0.2f);
         this.StartCoroutine(() => reminder.gameObject.SetActive(true), 0.15f);
     }
 
     public void Toggle()
     {
-        if (shown)
+        if (IsShown)
         {
             Hide();
             return;
