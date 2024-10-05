@@ -34590,6 +34590,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button
       objectReference: {fileID: 0}
+    - target: {fileID: 7928942227317443046, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
+      propertyPath: doColors
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7928942227390417108, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
       propertyPath: m_SizeDelta.x
       value: -10
@@ -49841,6 +49845,10 @@ PrefabInstance:
     - target: {fileID: 7928942227317443043, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
       propertyPath: m_Name
       value: Fly
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928942227317443046, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
+      propertyPath: doColors
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}

@@ -98,7 +98,7 @@ namespace AnttiStarterKit.Animations
             });
             
             if (!texts.Any()) return;
-            originalFrontColor = texts.First().color;
+            // originalFrontColor = texts.First().color;
         }
 
         public void OnPointerExit(PointerEventData eventData)

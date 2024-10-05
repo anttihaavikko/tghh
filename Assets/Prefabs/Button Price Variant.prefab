@@ -242,6 +242,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button Price Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7928942227317443046, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
+      propertyPath: texts.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7928942227317443046, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
+      propertyPath: texts.Array.data[1]
+      value: 
+      objectReference: {fileID: 1794072126}
     - target: {fileID: 7928942227453630283, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
       propertyPath: m_text
       value: Refuel
