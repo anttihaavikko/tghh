@@ -18,6 +18,7 @@ public class World : MonoBehaviour
     [SerializeField] private LineRenderer route;
     [SerializeField] private Book book;
     [SerializeField] private Appearer info;
+    [SerializeField] private Transform physicsDecorations;
 
     private Country current;
     private bool flying;
@@ -30,7 +31,9 @@ public class World : MonoBehaviour
     {
         current = countries.Random();
         current.Show();
-        // hunter.transform.position = current.CapitalPosition;
+        hunter.transform.position = current.CapitalPosition;
+        hunter.Hop();
+        this.StartCoroutine(() => physicsDecorations.SetParent(null), 0.25f);
         
         book.Init(countries, level);
         ShowMenu(hunter.transform.position);
