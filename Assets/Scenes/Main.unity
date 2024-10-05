@@ -3549,7 +3549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textArea: {fileID: 233035286}
-  highlightColor: {r: 1, g: 0, b: 0, a: 1}
+  highlightColor: {r: 0.84705883, g: 0.11764706, b: 0.35686275, a: 1}
   delayBetweenLetters: 0.02
   delayBetweenWords: 0.05
   staticPlacing: 1
@@ -12361,7 +12361,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.40503737, g: 0.5483614, b: 0.7735849, a: 0}
+  m_BackGroundColor: {r: 0.13725491, g: 0.22352941, b: 0.35686275, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -28765,7 +28765,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: df96ec3299de64303a7524169055851e, type: 3}
-  m_Color: {r: 0.43907973, g: 0.6509434, b: 0.4535799, a: 1}
+  m_Color: {r: 0.34901962, g: 0.7882353, b: 0.64705884, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -19,7 +19,7 @@ public class HuntTask
 
     private string AddColors(string text)
     {
-        return text.Replace("(", "<color=red>")
+        return text.Replace("(", "<color=#D81E5B>")
             .Replace(")", "</color>")
             .Replace("[", "<size=20>")
             .Replace("]", "</size>");
