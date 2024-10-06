@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AnttiStarterKit.Animations;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class Menu : MonoBehaviour
     
     public void Show(Book book, Country country, bool inCapital, bool flip)
     {
+        if(country != null) buttons[1].SetPrice(Mathf.CeilToInt(country.PriceModifier * 100));
         buttons[1].gameObject.SetActive(inCapital);
         buttons[2].gameObject.SetActive(false); // bribe
         buttons[3].gameObject.SetActive(inCapital && book.HasUncompleted(TaskType.Trap) && country != null && book.CanComplete(TaskType.Trap, country));
@@ -22,6 +24,7 @@ public class Menu : MonoBehaviour
 
     public void HideButton(int index)
     {
+        buttons[index].Reset();
         buttons[index].gameObject.SetActive(false);
     }
 

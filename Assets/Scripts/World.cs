@@ -4,6 +4,7 @@ using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Utils;
+using TMPro;
 using UnityEngine;
 
 public class World : MonoBehaviour
@@ -20,6 +21,8 @@ public class World : MonoBehaviour
     [SerializeField] private Appearer info;
     [SerializeField] private Transform physicsDecorations;
     [SerializeField] private ButtonStyle cancelButton;
+    [SerializeField] private TMP_Text fuelDisplay;
+    [SerializeField] private Transform fuelBar, fuelPreview;
 
     private Country current;
     private bool flying;
@@ -29,8 +32,16 @@ public class World : MonoBehaviour
     private bool wasBookShown;
     private bool started;
 
+    private int fuel;
+    private int tank;
+
+    private const int TankSize = 250;
+
     private void Start()
     {
+        tank = fuel = TankSize;
+        UpdateFuel();
+        
         current = countries.Random();
         current.Show();
         hunter.transform.position = current.CapitalPosition;
@@ -40,6 +51,34 @@ public class World : MonoBehaviour
         book.Init(countries, level);
         
         hunter.Bubble.Show("Time to do some (hunting)! Where did I put that (notebook) of mine...");
+    }
+
+    private void UpdateFuel(float duration = 0.3f)
+    {
+        var ratio = 1f * fuel / tank;
+        var size = new Vector3(ratio, 1, 1);
+        Tweener.ScaleToQuad(fuelPreview, size, duration);
+        Tweener.ScaleToQuad(fuelBar, size, duration);
+        // this.StartCoroutine(() => Tweener.ScaleToQuad(fuelBar, size, 0.3f), duration);
+        fuelDisplay.text = $"Fuel: {fuel}/{tank} liters";
+    }
+
+    private void PreviewFuelLoss(float distance)
+    {
+        var preview = Mathf.Max(0, fuel - GetFuelConsumption(distance));
+        var ratio = 1f * preview / tank;
+        fuelPreview.localScale = new Vector3(ratio, 1, 1);
+    }
+
+    private int GetFuelConsumption(float distance)
+    {
+        return Mathf.RoundToInt(distance * 10) + 20;
+    }
+
+    private void ConsumeFuel(float distance, float duration)
+    {
+        fuel = Mathf.Max(0, fuel - GetFuelConsumption(distance));
+        UpdateFuel(duration);
     }
 
     private void NextLevel()
@@ -66,6 +105,13 @@ public class World : MonoBehaviour
             this.StartCoroutine(() => book.Show(), 0.4f);
             this.StartCoroutine(() => ShowMenu(hunter.transform.position), 0.8f);
         }
+    }
+
+    public void Refuel()
+    {
+        menu.HideButton(1);
+        fuel = tank;
+        UpdateFuel();
     }
 
     public void CancelFlyMode()
@@ -171,6 +217,8 @@ public class World : MonoBehaviour
         var mp = cam.ScreenToWorldPoint(Input.mousePosition).WhereZ(0);
         route.SetPosition(0, hunter.transform.position);
         route.SetPosition(1, mp);
+        var distance = Vector3.Distance(mp, hunter.transform.position);
+        PreviewFuelLoss(distance);
     }
     
     private void SetTarget()
@@ -184,6 +232,7 @@ public class World : MonoBehaviour
         flying = false;
         var distance = Vector3.Distance(mp, hunter.transform.position);
         var delay = Mathf.Max(1.2f, 0.3f * distance);
+        ConsumeFuel(distance, delay);
         Tweener.MoveToQuad(hunter.transform, mp, delay);
         var landed = hit.Select(h => h.GetComponent<Country>()).Where(c => c != null).ToList();
         var closest = landed.OrderBy(c => Vector3.Distance(mp, c.CapitalPosition)).First();
