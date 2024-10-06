@@ -5,6 +5,7 @@ using AnttiStarterKit.Extensions;
 public class HuntTarget
 {
     public string Name { get; set; }
+    public string Short { get; set; }
     public string Description { get; set; }
 }
 
@@ -13,16 +14,9 @@ public class Hunt
     public List<HuntTask> Tasks { get; }
     public HuntTarget Target { get; }
 
-    public Hunt(List<Country> countries, int level)
+    public Hunt(List<Country> countries, List<HuntTarget> targetList, int level)
     {
-        var list = new List<HuntTarget>
-        {
-            new() { Name = "Test", Description = "What ever dude..." },
-            new() { Name = "Second", Description = "Something else here" },
-            new() { Name = "Third", Description = "Lorem ipsum dolor" }
-        };
-        
-        Target = level < list.Count ? list[level] : list.Random();
+        Target = level < targetList.Count ? targetList[level] : targetList.Random();
         
         if (level == 0)
         {

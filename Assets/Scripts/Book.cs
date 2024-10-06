@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
@@ -17,10 +18,16 @@ public class Book : MonoBehaviour
 
     public bool IsShown { get; private set; }
     public string FirstTaskLetters => hunt.Tasks[0].CountryLetters;
+    public string TargetName => hunt.Target.Short.ToUpper();
 
-    public void Init(List<Country> countries, int level)
+    private void Start()
     {
-        hunt = new Hunt(countries, level);
+        transform.position = offPosition.position;
+    }
+
+    public void Init(List<Country> countries, List<HuntTarget> targetList, int level)
+    {
+        hunt = new Hunt(countries, targetList, level);
         tasks.ForEach(t =>
         {
             t.Reset();

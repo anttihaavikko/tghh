@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Utils;
@@ -43,11 +44,30 @@ public class World : MonoBehaviour
 
     private int money = 500;
     private TimeSpan time = new TimeSpan(0, 6, 0, 0);
+    private List<HuntTarget> targetList;
 
     private const int TankSize = 250;
 
     private void Start()
     {
+        targetList = new List<HuntTarget>
+        {
+            new() { Name = "Wolbachia", Short = "Wolbachia", Description = "This tiny parasitic creature needs to be eradicated. Be careful not to become the host." },
+            new() { Name = "Yersinia", Short = "Yersinia", Description = "Filthy disease spreader this one! Get rid of it quick or we might soon have another plague in our hands." },
+            new() { Name = "Vibrio Vulnificus", Short = "V.Vulnificus", Description = "The increased sea temperatures have increased the population of these tiny pests. Time to thin it out a bit!" },
+            new() { Name = "Spirillum Volutans", Short = "S.Volutans", Description = "This little nuisance likes to dwell in freshwater. Get rid of it before it infects our drink supply." },
+            new() { Name = "Rickettsia Quintana", Short = "R.Quintana", Description = "They lurk in cooties! Time to hunt it down, we don't want another trench fever outbreak!" },
+            new() { Name = "Proteus Vulgaris", Short = "P.Vulgaris", Description = "Common and dangerous! Often causes wounds to become infected. Might be closer than you think." },
+            new() { Name = "Nocardia Asteroides", Short = "N.Asteroides", Description = "Not that dangerous to most people but can cause some major breathing issues to some." },
+            new() { Name = "Mycoplasma Hominis", Short = "M.Hominis", Description = "A nasty one this little bugger! It can literally phase inside you and even cause infertility." },
+            new() { Name = "Leptospira Interrogans", Short = "L.Interrogans", Description = "Don't let the cute corkscrew look fool you! Often a threat to our pets but can be dangerous to humans too." },
+            new() { Name = "Kingella Kingae", Short = "K.Kingae", Description = "What a faux royalty! This tiny pest is a major nuisance and a cause of several different kinds of infections and diseases." },
+            new() { Name = "Gardnerella Vaginalis", Short = "G.Vaginalis", Description = "The stinky one! Just follow the fish-like scent and you'll find it in no time. It's still quite dangerous." },
+            new() { Name = "Ehrlichia Chaffeensis", Short = "E.Chaffeensis", Description = "It is hosting in ticks and leeches and can cause various different issues even affecting the mind." },
+            new() { Name = "Campylobacter Fetus", Short = "C.Fetus", Description = "This tiny critter prays on cattle. And by extension, it's also a threat to us humans. Protect the cows and get rid of it!" },
+            new() { Name = "Borrelia Burgdorferi", Short = "B.Burgdorferi", Description = "Cute name but a nasty little bastard! It spreads lyme disease and other other equally severe diseases." }
+        }.RandomOrder().ToList();
+        
         tank = fuel = TankSize;
         UpdateFuel();
         
@@ -60,7 +80,7 @@ public class World : MonoBehaviour
         hunter.Hop();
         this.StartCoroutine(() => physicsDecorations.SetParent(null), 0.25f);
         
-        book.Init(countries, level);
+        book.Init(countries, targetList, level);
         
         hunter.Bubble.Show("Time to do some (hunting)! Where did I put that (notebook) of mine...");
     }
@@ -124,7 +144,7 @@ public class World : MonoBehaviour
     private void NextLevel()
     {
         level++;
-        book.Init(countries, level);
+        book.Init(countries, targetList, level);
         book.Show();
         ShowMenu(hunter.transform.position);
     }
@@ -181,7 +201,7 @@ public class World : MonoBehaviour
         cancelButton.gameObject.SetActive(true);
         wasBookShown = book.IsShown;
         if(wasBookShown) book.Hide();
-        info.ShowWithText("Pick flight target!", 0);
+        ShowInfo("Pick (flight) target!");
         route.gameObject.SetActive(true);
         menu.Hide();
         zoomCam.SetActive(false);
@@ -217,7 +237,7 @@ public class World : MonoBehaviour
         {
             if (success)
             {
-                info.ShowWithText("Found the track!", 0);    
+                ShowInfo($"Found the track of ({book.TargetName})!");
             }
             
             this.StartCoroutine(() =>
@@ -227,6 +247,14 @@ public class World : MonoBehaviour
                 huntCam.SetActive(false);
             }, 1.5f);
         }, 2f);
+    }
+
+    private void ShowInfo(string message, float delay = 0)
+    {
+        var sb = new StringBuilder(message);
+        sb.Replace("(", "<color=#FFFD98>");
+        sb.Replace(")", "</color>");
+        info.ShowWithText(sb.ToString(), delay);
     }
 
     private bool TryComplete(TaskType type, int buttonIndex)
@@ -261,7 +289,7 @@ public class World : MonoBehaviour
                 this.StartCoroutine(() => book.Hide(), 0.7f);
                 this.StartCoroutine(NextLevel, 1.2f);
             }
-            info.ShowWithText(success ? "Successfully hunted X!" : "You didn't find anything...", 0);
+            ShowInfo(success ? $"Successfully hunted ({book.TargetName})!" : "You didn't find anything...");
             this.StartCoroutine(() =>
             {
                 info.Hide();
@@ -319,7 +347,7 @@ public class World : MonoBehaviour
             hunter.Land();
             
             route.gameObject.SetActive(false);
-            info.ShowWithText(inCapital || closest.Visited ? $"Landed in {closest.name.ToUpper()}!" : "Landed in some UNKNOWN LAND...\n<size=50>No cities nearby...</size>", 0.3f);
+            ShowInfo(inCapital || closest.Visited ? $"Landed in ({closest.name.ToUpper()})!" : "Landed in some (UNKNOWN LAND)...\n<size=50>No (cities) nearby...</size>", 0.3f);
             this.StartCoroutine(() => ShowMenu(inCapital ? closest.CapitalPosition : hunter.transform.position, closest, flipped), 0.5f);
         }, delay);
         

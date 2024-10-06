@@ -1928,7 +1928,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 18, y: -293}
+  m_AnchoredPosition: {x: 18, y: -23}
   m_SizeDelta: {x: 390, y: 310.9}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &192656008
@@ -3235,7 +3235,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 53.574}
+  m_SizeDelta: {x: 0, y: 81.32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &261024858
 MonoBehaviour:
@@ -3257,7 +3257,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem ipsum dolor sit amet something here etc.
+  m_text: This tiny parasitic creature needs to be eradicated. Be careful not to
+    become the host.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b77522aea8f0b427f87a1da9b8e36c15, type: 2}
   m_sharedMaterial: {fileID: 9050358033925898252, guid: b77522aea8f0b427f87a1da9b8e36c15, type: 2}
@@ -3284,12 +3285,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20.25
+  m_fontSize: 19.95
   m_fontSizeBase: 20.25
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 50
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
@@ -42864,7 +42865,7 @@ RectTransform:
   m_GameObject: {fileID: 1822627500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: -1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1491029260}
@@ -48272,7 +48273,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 56.745}
+  m_SizeDelta: {x: 0, y: 54.252}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1999515518
 MonoBehaviour:
@@ -49193,7 +49194,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 13.873}
+  m_SizeDelta: {x: 0, y: 10.754}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2081812191
 MonoBehaviour:
