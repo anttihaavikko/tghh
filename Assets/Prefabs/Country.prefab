@@ -303,6 +303,7 @@ GameObject:
   - component: {fileID: 5743448858974141536}
   - component: {fileID: 5743448858974141537}
   - component: {fileID: 5743448858974141538}
+  - component: {fileID: 25426448987817969}
   m_Layer: 6
   m_Name: Country
   m_TagString: Untagged
@@ -398,6 +399,17 @@ PolygonCollider2D:
       - {x: 1.9917781, y: 2.398948}
       - {x: 2.0913875, y: 2.623753}
       - {x: 2.0918572, y: 2.798037}
+--- !u!210 &25426448987817969
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5743448858974141543}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 5
 --- !u!1 &5743448859323891130
 GameObject:
   m_ObjectHideFlags: 0

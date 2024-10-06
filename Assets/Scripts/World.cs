@@ -70,6 +70,7 @@ public class World : MonoBehaviour
 
     public void CancelFlyMode()
     {
+        info.Hide();
         cancelButton.Reset();
         cancelButton.gameObject.SetActive(false);
         flying = false;
