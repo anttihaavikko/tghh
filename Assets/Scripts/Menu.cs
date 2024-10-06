@@ -24,7 +24,7 @@ public class Menu : MonoBehaviour
         buttons[1].gameObject.SetActive(inCapital && needsFuel);
         buttons[2].gameObject.SetActive(inCapital && country != null && !country.IsBribed); // bribe
         buttons[3].gameObject.SetActive(inCapital && book.HasUncompleted(TaskType.Trap) && country != null && (country.HasTraps || book.CanComplete(TaskType.Trap, country)));
-        buttons[4].gameObject.SetActive(canSell); // sell
+        buttons[4].gameObject.SetActive(inCapital && canSell); // sell
         buttons[5].gameObject.SetActive(book.HasUncompleted(TaskType.Track));
         
         // flipper.localScale = panel.localScale = new Vector3(flip ? -1 : 1, 1, 1);
