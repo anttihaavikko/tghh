@@ -26,12 +26,14 @@ public class Country : MonoBehaviour
     public string BribeEffect => bribe.Description;
 
     private Bribe bribe;
+    private int fuelPriceMod = 1;
+    private bool revealed;
 
     public bool Visited { get; private set; }
     public bool IsBribed { get; private set; }
     
 
-    public int FuelPrice => Mathf.CeilToInt(priceModifier * 100);
+    public int FuelPrice => Mathf.CeilToInt(priceModifier * 100) * fuelPriceMod;
     public int TrapPrice => Mathf.CeilToInt(priceModifier * 20);
     public int BribePrice => Mathf.RoundToInt(priceModifier * 250);
     public int PriceModifier => Mathf.CeilToInt(priceModifier * 100);
@@ -50,6 +52,17 @@ public class Country : MonoBehaviour
             {
                 Description = $"(The {nationality} Embassy) increases the (range) where you can access (cities) after landing close by.",
                 Effect = (world, country) => world.CityRange++
+            },
+            new()
+            {
+                Description = $"(The {nationality} Embassy) allows you to (refuel) in ({CapitalName}) for (free) of charge.",
+                Effect = (world, country) => country.fuelPriceMod = 0
+            }
+            ,
+            new()
+            {
+                Description = $"Bribing (The {nationality} Embassy) reveals all other cities in a (1000 km) radius.",
+                Effect = (world, country) => world.RevealCitiesAround(country, 2f)
             }
         }.Random();
     }
@@ -70,8 +83,14 @@ public class Country : MonoBehaviour
 
     public void Hide()
     {
-        if (IsBribed) return;
+        if (IsBribed && revealed) return;
         capitalText.Hide();
         capitalTap.HideWithDelay();
+    }
+
+    public void RevealCapital()
+    {
+        revealed = true;
+        Show();
     }
 }

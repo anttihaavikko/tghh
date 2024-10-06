@@ -304,6 +304,7 @@ GameObject:
   - component: {fileID: 5743448858974141537}
   - component: {fileID: 5743448858974141538}
   - component: {fileID: 25426448987817969}
+  - component: {fileID: 1675126073655437778}
   m_Layer: 6
   m_Name: Country
   m_TagString: Untagged
@@ -340,11 +341,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   capitalName: Helsinki
+  nationality: 
   capital: {fileID: 5743448858931714095}
   capitalNameField: {fileID: 4031684405029048025}
   capitalNameOutline: {fileID: 928232635118609866}
   capitalText: {fileID: 642029028443349943}
   capitalTap: {fileID: 808746139930297986}
+  priceModifier: 1
 --- !u!60 &5743448858974141538
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -407,9 +410,23 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5743448858974141543}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1052246317
+  m_SortingLayer: 1
   m_SortingOrder: 5
+--- !u!114 &1675126073655437778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5743448858974141543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bef774f5dc8348a9b244a49fb25a0a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 0
+  target: {fileID: 3646068992126582010}
 --- !u!1 &5743448859323891130
 GameObject:
   m_ObjectHideFlags: 0

@@ -542,4 +542,9 @@ public class World : MonoBehaviour
         menu.transform.position = pos;
         menu.Show(book, country, inCapital, flip, loot.Any());
     }
+
+    public void RevealCitiesAround(Country country, float radius)
+    {
+        countries.Where(c => Vector3.Distance(c.CapitalPosition, country.CapitalPosition) < radius).ToList().ForEach(c => c.RevealCapital());
+    }
 }
