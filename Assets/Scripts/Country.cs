@@ -17,6 +17,7 @@ public class Country : MonoBehaviour
 
     public bool Visited { get; private set; }
     public float PriceModifier => priceModifier;
+    public int FuelPrice => Mathf.CeilToInt(priceModifier * 100);
 
     private void Start()
     {

@@ -34014,6 +34014,9 @@ MonoBehaviour:
   fuelDisplay: {fileID: 1705579628}
   fuelBar: {fileID: 717696572}
   fuelPreview: {fileID: 1513905095}
+  moneyDisplay: {fileID: 1619680998}
+  moneyPulsater: {fileID: 1619681000}
+  effectCamera: {fileID: 519420035}
 --- !u!4 &1433259712
 Transform:
   m_ObjectHideFlags: 0
@@ -38487,6 +38490,7 @@ GameObject:
   - component: {fileID: 1619680997}
   - component: {fileID: 1619680999}
   - component: {fileID: 1619680998}
+  - component: {fileID: 1619681000}
   m_Layer: 5
   m_Name: Money
   m_TagString: Untagged
@@ -38511,9 +38515,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -2.5, y: -96}
+  m_AnchoredPosition: {x: 37.689728, y: -128.18393}
   m_SizeDelta: {x: 251.1867, y: 46.6435}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 0.16, y: 0.31}
 --- !u!114 &1619680998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38611,6 +38615,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1619680996}
   m_CullTransparentMesh: 1
+--- !u!114 &1619681000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619680996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15a34521434044b8da4e730f3f4dcc95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 0.1
+  speed: 4
 --- !u!1001 &1620749867
 PrefabInstance:
   m_ObjectHideFlags: 0

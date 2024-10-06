@@ -4,6 +4,7 @@ using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Utils;
+using AnttiStarterKit.Visuals;
 using TMPro;
 using UnityEngine;
 
@@ -23,6 +24,9 @@ public class World : MonoBehaviour
     [SerializeField] private ButtonStyle cancelButton;
     [SerializeField] private TMP_Text fuelDisplay;
     [SerializeField] private Transform fuelBar, fuelPreview;
+    [SerializeField] private TMP_Text moneyDisplay;
+    [SerializeField] private Pulsater moneyPulsater;
+    [SerializeField] private EffectCamera effectCamera;
 
     private Country current;
     private bool flying;
@@ -35,12 +39,16 @@ public class World : MonoBehaviour
     private int fuel;
     private int tank;
 
+    private int money = 500;
+
     private const int TankSize = 250;
 
     private void Start()
     {
         tank = fuel = TankSize;
         UpdateFuel();
+        
+        UpdateMoney();
         
         current = countries.Random();
         current.Show();
@@ -61,6 +69,13 @@ public class World : MonoBehaviour
         Tweener.ScaleToQuad(fuelBar, size, duration);
         // this.StartCoroutine(() => Tweener.ScaleToQuad(fuelBar, size, 0.3f), duration);
         fuelDisplay.text = $"Fuel: {fuel}/{tank} liters";
+    }
+
+    private void UpdateMoney(int change = 0)
+    {
+        money += change;
+        moneyDisplay.text = $"{money} <size=35>€</size>";
+        if(change != 0) moneyPulsater.Pulsate();
     }
 
     private void PreviewFuelLoss(float distance)
@@ -109,6 +124,15 @@ public class World : MonoBehaviour
 
     public void Refuel()
     {
+        if (money < current.FuelPrice)
+        {
+            effectCamera.BaseEffect(0.2f);
+            hunter.Bubble.Show("I don't have (enough funds) to do that...");
+            return;
+        }
+        
+        UpdateMoney(-current.FuelPrice);
+        
         menu.HideButton(1);
         fuel = tank;
         UpdateFuel();
