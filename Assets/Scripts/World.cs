@@ -554,4 +554,9 @@ public class World : MonoBehaviour
         tank += amount;
         UpdateFuel(0.2f);
     }
+
+    public void IncreaseMultiplier()
+    {
+        score.AddMulti();
+    }
 }

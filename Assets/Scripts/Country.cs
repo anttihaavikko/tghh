@@ -72,6 +72,11 @@ public class Country : MonoBehaviour
             {
                 Description = $"Bribing (The {nationality} Embassy) will increase your (plane tank) size with additional (150 liters).",
                 Effect = (world, country) => world.IncreaseTank(150)
+            },
+            new()
+            {
+                Description = $"(The {nationality} Embassy) will (double) all your future (score gains).",
+                Effect = (world, country) => world.IncreaseMultiplier()
             }
         }.Random();
     }
