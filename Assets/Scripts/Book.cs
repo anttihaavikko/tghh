@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using TMPro;
 using UnityEngine;
 
@@ -13,12 +14,15 @@ public class Book : MonoBehaviour
     [SerializeField] private TMP_Text reminder;
     [SerializeField] private Transform arrow;
     [SerializeField] private TMP_Text title, description;
+    [SerializeField] private Hunter hunter;
     
     private Hunt hunt;
 
     public bool IsShown { get; private set; }
     public string FirstTaskLetters => hunt.Tasks[0].CountryLetters;
     public string TargetName => hunt.Target.Short.ToUpper();
+
+    public HuntReward Reward => hunt.Reward;
 
     private void Start()
     {
@@ -70,6 +74,7 @@ public class Book : MonoBehaviour
 
     public void Show()
     {
+        ToggleSound();
         IsShown = true;
         Tweener.MoveToBounceOut(transform, onPosition.position, 0.2f);
         reminder.gameObject.SetActive(false);
@@ -78,10 +83,16 @@ public class Book : MonoBehaviour
 
     public void Hide()
     {
+        ToggleSound();
         IsShown = false;
         Tweener.MoveToBounceOut(transform, offPosition.position, 0.2f);
         this.StartCoroutine(() => reminder.gameObject.SetActive(true), 0.15f);
         arrow.localScale = new Vector3(1, -1, 1);
+    }
+
+    private void ToggleSound()
+    {
+        AudioManager.Instance.PlayEffectAt(9, hunter.transform.position, 1.5f);
     }
 
     public void Toggle()

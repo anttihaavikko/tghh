@@ -16,4 +16,9 @@ public class ActionButton : MonoBehaviour
     {
         price.text = $"{amount} €";
     }
+
+    public void SetSecondaryLine(string text)
+    {
+        price.text = text;
+    }
 }

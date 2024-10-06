@@ -51,7 +51,7 @@ public class HuntTask
         };
     }
 
-    private static string GetLetters(int amount, string name)
+    public static string GetLetters(int amount, string name)
     {
         return string.Join(string.Empty, name.Distinct().Where(l => l.ToString() != " ").OrderBy(_ => Random.value).Take(amount));
     }

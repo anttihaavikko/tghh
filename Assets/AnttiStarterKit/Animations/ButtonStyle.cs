@@ -28,7 +28,6 @@ namespace AnttiStarterKit.Animations
 
         [SerializeField] private int clickSound = -1, hoverSound = -1;
         [SerializeField] private float clickVolume = 1f, hoverVolume = 1f;
-        
 
         private Vector3 originalScale;
         private Color originalBackColor, originalFrontColor;
@@ -36,6 +35,10 @@ namespace AnttiStarterKit.Animations
         private Camera cam;
 
         public bool IsHovered { get; set; }
+
+        public Action onClick;
+        public Action onHoverIn;
+        public Action onHoverOut;
 
         private void Start()
         {
@@ -56,6 +59,7 @@ namespace AnttiStarterKit.Animations
             ApplyRotation(Random.Range(-rotationAmount, rotationAmount), TweenEasings.BounceEaseOut);
             ApplyColors(backColors.Random(), frontColors.Random());
             DoSound(hoverSound, hoverVolume);
+            onHoverIn?.Invoke();
         }
     
         private void ApplyScaling(float amount, Func<float, float> easing)
@@ -105,6 +109,7 @@ namespace AnttiStarterKit.Animations
         {
             DoSound(hoverSound, hoverVolume);
             Reset();
+            onHoverOut?.Invoke();
         }
 
         public void Reset()
@@ -118,6 +123,7 @@ namespace AnttiStarterKit.Animations
         public void OnPointerClick(PointerEventData eventData)
         {
             DoSound(clickSound, clickVolume);
+            onClick?.Invoke();
         }
 
         private void DoSound(int index, float volume)

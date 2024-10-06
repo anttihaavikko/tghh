@@ -34,6 +34,10 @@ public class World : MonoBehaviour
     [SerializeField] private TMP_Text timeDisplay;
     [SerializeField] private GameObject endCam;
     [SerializeField] private SoundComposition buySound;
+    [SerializeField] private Transform lootContainer;
+    [SerializeField] private ButtonStyle sellButtonPrefab;
+    [SerializeField] private GameObject stopSellingButton;
+    [SerializeField] private GameObject sellCam;
 
     private Country current;
     private bool flying;
@@ -51,6 +55,8 @@ public class World : MonoBehaviour
     private List<HuntTarget> targetList;
     private bool warnedAboutFuel;
     private bool toldAboutHunt;
+    private readonly List<HuntReward> loot = new();
+    private bool selling;
 
     private const int TankSize = 250;
 
@@ -94,6 +100,35 @@ public class World : MonoBehaviour
         {
             hunter.Bubble.Show("Time to do some (hunting)! Where did I put that (notebook) of mine...");
         }, 1f);
+    }
+
+    public void SellMode()
+    {
+        selling = true;
+        menu.Hide();
+        hunter.Bubble.Show("Hmm... time to turn (these pelts) of mine to some (hard currency). Which pelts should I (sell) here?");
+        sellCam.SetActive(true);
+        stopSellingButton.SetActive(true);
+        hunter.Read(true);
+    }
+
+    public void StopSelling()
+    {
+        selling = false;
+        sellCam.SetActive(false);
+        stopSellingButton.SetActive(false);
+        ShowMenuAgain();
+        hunter.Read(false);
+    }
+
+    public void Sell(HuntReward reward)
+    {
+        if (!selling) return;
+        PlayBuySound();
+        UpdateMoney(reward.GetSellPrice(current));
+        loot.Remove(reward);
+        Destroy(reward.Button.gameObject);
+        if(!loot.Any()) StopSelling();
     }
 
     private void UpdateTime()
@@ -171,7 +206,11 @@ public class World : MonoBehaviour
         UpdateRoute();
         if (Input.GetMouseButtonDown(0)) SetTarget();
         if (DevKey.Down(KeyCode.F)) FlyMode();
-        if (DevKey.Down(KeyCode.N)) NextLevel();
+        if (DevKey.Down(KeyCode.N))
+        {
+            AddLoot(book.Reward);
+            NextLevel();
+        }
         if (DevKey.Down(KeyCode.T)) PassTime(TimeSpan.FromHours(12), 0.2f);
         if (DevKey.Down(KeyCode.Z)) UpdateMoney(100);
 
@@ -220,8 +259,13 @@ public class World : MonoBehaviour
         flying = false;
         if(wasBookShown) book.Show();
         route.gameObject.SetActive(false);
-        menu.Show(book, current, inCapital, isMenuFlipped);
+        ShowMenuAgain();
         zoomCam.SetActive(true);
+    }
+
+    private void ShowMenuAgain()
+    {
+        menu.Show(book, current, inCapital, isMenuFlipped, loot.Any());
     }
 
     public void FlyMode()
@@ -280,13 +324,13 @@ public class World : MonoBehaviour
             this.StartCoroutine(() =>
             {
                 info.Hide();
-                menu.Show(book, current, inCapital, isMenuFlipped);
+                menu.Show(book, current, inCapital, isMenuFlipped, loot.Any());
                 huntCam.SetActive(false);
 
                 if (success && !toldAboutHunt)
                 {
                     toldAboutHunt = true;
-                    hunter.Bubble.Show($"Right, now I gotta go after the (main target) of the hunt, {book.TargetName}!");
+                    hunter.Bubble.Show($"Right, now I gotta go after the (main target) of the hunt, ({book.TargetName})!");
                 }
                 
             }, 1.5f);
@@ -327,6 +371,8 @@ public class World : MonoBehaviour
         
         this.StartCoroutine(() =>
         {
+            var reward = book.Reward;
+            
             if (success)
             {
                 book.Complete(TaskType.Hunt);
@@ -337,16 +383,28 @@ public class World : MonoBehaviour
 
             if (success)
             {
-                this.StartCoroutine(() => hunter.Bubble.Show("Here we go, (next target)! I should probably also (sell) this (pelt) somewhere..."), 1f);
+                this.StartCoroutine(() =>
+                {
+                    hunter.Bubble.Show("Here we go, (next target)! I should probably also (sell) this (pelt) somewhere...");
+                    AddLoot(reward);
+                }, 1f);
             }
             
             this.StartCoroutine(() =>
             {
                 info.Hide();
-                menu.Show(book, current, inCapital, isMenuFlipped);
+                menu.Show(book, current, inCapital, isMenuFlipped, loot.Any());
                 huntCam.SetActive(false);
             }, 1.5f);
         }, 2f);
+    }
+
+    private void AddLoot(HuntReward reward)
+    {
+        reward.Button = Instantiate(sellButtonPrefab, lootContainer);
+        reward.Button.onClick += () => Sell(reward);
+        reward.Button.onHoverIn += () => hunter.Bubble.Show(reward.Description, true);
+        loot.Add(reward);
     }
 
     private void UpdateRoute()
@@ -455,6 +513,6 @@ public class World : MonoBehaviour
     {
         isMenuFlipped = flip;
         menu.transform.position = pos;
-        menu.Show(book, country, inCapital, flip);
+        menu.Show(book, country, inCapital, flip, loot.Any());
     }
 }
