@@ -548,4 +548,10 @@ public class World : MonoBehaviour
     {
         countries.Where(c => Vector3.Distance(c.CapitalPosition, country.CapitalPosition) < radius).ToList().ForEach(c => c.RevealCapital());
     }
+
+    public void IncreaseTank(int amount)
+    {
+        tank += amount;
+        UpdateFuel(0.2f);
+    }
 }

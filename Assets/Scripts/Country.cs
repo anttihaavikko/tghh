@@ -28,15 +28,15 @@ public class Country : MonoBehaviour
     private Bribe bribe;
     private int fuelPriceMod = 1;
     private bool revealed;
+    private int sellPriceMod = 1;
 
     public bool Visited { get; private set; }
     public bool IsBribed { get; private set; }
-    
 
     public int FuelPrice => Mathf.CeilToInt(priceModifier * 100) * fuelPriceMod;
     public int TrapPrice => Mathf.CeilToInt(priceModifier * 20);
     public int BribePrice => Mathf.RoundToInt(priceModifier * 250);
-    public int PriceModifier => Mathf.CeilToInt(priceModifier * 100);
+    public int PriceModifier => Mathf.CeilToInt(priceModifier * 100) * sellPriceMod;
 
     private void Start()
     {
@@ -57,12 +57,21 @@ public class Country : MonoBehaviour
             {
                 Description = $"(The {nationality} Embassy) allows you to (refuel) in ({CapitalName}) for (free) of charge.",
                 Effect = (world, country) => country.fuelPriceMod = 0
-            }
-            ,
+            },
             new()
             {
                 Description = $"Bribing (The {nationality} Embassy) reveals all other cities in a (1000 km) radius.",
                 Effect = (world, country) => world.RevealCitiesAround(country, 2f)
+            },
+            new()
+            {
+                Description = $"(The {nationality} Embassy) has a great (fence). They will (buy) all your (pelts) for (double) the value.",
+                Effect = (world, country) => country.sellPriceMod = 2
+            },
+            new()
+            {
+                Description = $"Bribing (The {nationality} Embassy) will increase your (plane tank) size with additional (150 liters).",
+                Effect = (world, country) => world.IncreaseTank(150)
             }
         }.Random();
     }

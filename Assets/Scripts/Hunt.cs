@@ -37,7 +37,7 @@ public class HuntReward
         var multi = 1;
         if (Country.All(letter => current.name.ToUpper().Contains(letter))) multi *= 2;
         if (City.All(letter => current.CapitalName.ToUpper().Contains(letter))) multi *= 2;
-        return Mathf.RoundToInt(BaseValue * multi * current.FuelPrice / 100f);
+        return Mathf.RoundToInt(BaseValue * multi * current.PriceModifier / 100f);
     }
 }
 
