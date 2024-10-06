@@ -508,6 +508,10 @@ PrefabInstance:
       value: Lisbon
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Portugese
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.87
       objectReference: {fileID: 0}
@@ -1449,6 +1453,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Ljubljana
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Slovenian
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -2567,6 +2575,10 @@ PrefabInstance:
       value: Berlin
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: German
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 1.09
       objectReference: {fileID: 0}
@@ -3249,7 +3261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5248951233457494614, guid: 321de9d075f72467d9679e15c4ed27e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: BuyTrap
+      value: Bribe
       objectReference: {fileID: 0}
     - target: {fileID: 5248951233457494614, guid: 321de9d075f72467d9679e15c4ed27e9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -3935,6 +3947,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Vatican City
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Vatican
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -9849,6 +9865,10 @@ PrefabInstance:
       value: Podgorica
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Montenegrin
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.64
       objectReference: {fileID: 0}
@@ -10476,6 +10496,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Oslo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Norweigean
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -11324,6 +11348,10 @@ PrefabInstance:
       value: Andorra la Vella
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Andorran
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 1.05
       objectReference: {fileID: 0}
@@ -12130,6 +12158,7 @@ MonoBehaviour:
   - {fileID: 631597422}
   - {fileID: 502396352}
   - {fileID: 502087342}
+  hunter: {fileID: 1447658612}
 --- !u!114 &486771823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12547,6 +12576,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Stockholm
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Swedish
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -13537,6 +13570,10 @@ PrefabInstance:
       value: Prague
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Czechian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.89
       objectReference: {fileID: 0}
@@ -14166,6 +14203,10 @@ PrefabInstance:
       value: Vilnius
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Lithuanian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.8
       objectReference: {fileID: 0}
@@ -14769,6 +14810,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Madrid
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Spanish
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -16434,6 +16479,10 @@ PrefabInstance:
       value: Bern
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Swiss
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 1.74
       objectReference: {fileID: 0}
@@ -17293,6 +17342,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Kyiv
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Ukrainian
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -18511,6 +18564,10 @@ PrefabInstance:
       value: Luxembourg
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Luxembourgish
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 1.34
       objectReference: {fileID: 0}
@@ -19138,6 +19195,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Bucharest
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Romanian
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -25151,6 +25212,10 @@ PrefabInstance:
       value: Warsaw
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Polish
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.66
       objectReference: {fileID: 0}
@@ -25778,6 +25843,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Amsterdam
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Dutch
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -26612,11 +26681,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5743448858931714095, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.754
+      value: 0.521
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858931714095, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.159
+      value: -4.801
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141536, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: m_RootOrder
@@ -26665,6 +26734,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Valletta
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Maltese
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -27460,6 +27533,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Copenhagen
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Danish
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -28323,6 +28400,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Monaco
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: "Mon\xE9gasque"
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -29225,6 +29306,10 @@ PrefabInstance:
       value: Sofia
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Bulgarian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.59
       objectReference: {fileID: 0}
@@ -29852,6 +29937,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Paris
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: French
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -31465,6 +31554,10 @@ PrefabInstance:
       value: Tallinn
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Estonian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.97
       objectReference: {fileID: 0}
@@ -32232,6 +32325,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Chisinau
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Moldovan
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -33092,6 +33189,10 @@ PrefabInstance:
       value: Riga
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Latvian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.87
       objectReference: {fileID: 0}
@@ -33830,6 +33931,10 @@ PrefabInstance:
       value: Rome
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Italian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.99
       objectReference: {fileID: 0}
@@ -34501,6 +34606,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Bratislava
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Slovakian
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -35438,6 +35547,10 @@ PrefabInstance:
       propertyPath: capitalName
       value: San Marino
       objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: San Marino
+      objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141538, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.size
       value: 5
@@ -36214,6 +36327,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Athens
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Greek
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -37639,6 +37756,10 @@ PrefabInstance:
       value: Moscow
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Russian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.6
       objectReference: {fileID: 0}
@@ -38765,6 +38886,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Nicosia
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Cypriot
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -40046,6 +40171,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Vienna
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Austrian
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -41423,6 +41552,10 @@ PrefabInstance:
       value: Belgrade
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Serbian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.67
       objectReference: {fileID: 0}
@@ -42418,6 +42551,10 @@ PrefabInstance:
       value: London
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: British
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 1.4
       objectReference: {fileID: 0}
@@ -43359,6 +43496,10 @@ PrefabInstance:
       value: Budapest
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Hungarian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.75
       objectReference: {fileID: 0}
@@ -44062,6 +44203,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Brussels
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Belgian
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -44889,6 +45034,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Tirana
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Albanian
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -45733,6 +45882,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Pristina
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Kosovan
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -46670,6 +46823,10 @@ PrefabInstance:
       value: Zurich
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Liechtensteiner
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 1.1
       objectReference: {fileID: 0}
@@ -47297,6 +47454,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Skopje
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: North Macedonian
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -48511,6 +48672,10 @@ PrefabInstance:
       value: Zagreb
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Croatian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.75
       objectReference: {fileID: 0}
@@ -49521,6 +49686,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Reykjavik
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Icelandic
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -50603,6 +50772,10 @@ PrefabInstance:
       value: Dublin
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Irish
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 1.41
       objectReference: {fileID: 0}
@@ -51440,6 +51613,10 @@ PrefabInstance:
       value: Sarajevo
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Bosnian, Herzegovinian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.58
       objectReference: {fileID: 0}
@@ -52069,6 +52246,10 @@ PrefabInstance:
       value: Minsk
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Belarusian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
       value: 0.7
       objectReference: {fileID: 0}
@@ -52528,6 +52709,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: capitalName
       value: Ankara
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Turkish
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier
@@ -53281,6 +53466,10 @@ PrefabInstance:
     - target: {fileID: 5743448858974141536, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
+      propertyPath: nationality
+      value: Finnish
       objectReference: {fileID: 0}
     - target: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
       propertyPath: priceModifier

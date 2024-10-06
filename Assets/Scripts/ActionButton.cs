@@ -7,6 +7,8 @@ public class ActionButton : MonoBehaviour
     [SerializeField] private ButtonStyle buttonStyle;
     [SerializeField] private TMP_Text price;
 
+    public ButtonStyle Button => buttonStyle;
+
     public void Reset()
     {
         buttonStyle.Reset();

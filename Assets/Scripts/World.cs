@@ -285,6 +285,22 @@ public class World : MonoBehaviour
         zoomCam.SetActive(false);
         flying = true;
     }
+    
+    public void Bribe()
+    {
+        if (money < current.BribePrice)
+        {
+            effectCamera.BaseEffect(0.2f);
+            hunter.Bubble.Show("I don't have (enough funds) to do that...");
+            PlayNoAfford();
+            return;
+        }
+        
+        PlayBuySound();
+        UpdateMoney(-current.BribePrice);
+        current.Bribe(this);
+        menu.HideButton(2);
+    }
 
     public void BuyTrap()
     {
