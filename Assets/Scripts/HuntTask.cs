@@ -29,7 +29,7 @@ public class HuntTask
     {
         type = taskType;
         var c = countries.Random();
-        Debug.Log($"From {c.name} / {c.CapitalName}");
+        // Debug.Log($"From {c.name} / {c.CapitalName}");
         country = GetLetters(countryLetters, c.name).ToUpper();
         city = GetLetters(cityLetters, c.CapitalName).ToUpper();
     }

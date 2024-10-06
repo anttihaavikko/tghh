@@ -11,6 +11,7 @@ public class Book : MonoBehaviour
     [SerializeField] private Transform onPosition, offPosition;
     [SerializeField] private TMP_Text reminder;
     [SerializeField] private Transform arrow;
+    [SerializeField] private TMP_Text title, description;
     
     private Hunt hunt;
 
@@ -31,6 +32,9 @@ public class Book : MonoBehaviour
                 t.Init(hunt.Tasks[index]);
             }
         });
+
+        title.text = $"{hunt.Target.Name} {level + 1}/7";
+        description.text = hunt.Target.Description;
         
         UpdateReminder();
     }

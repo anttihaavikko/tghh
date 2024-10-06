@@ -2015,6 +2015,8 @@ MonoBehaviour:
   offPosition: {fileID: 838825640}
   reminder: {fileID: 762235592}
   arrow: {fileID: 1822627501}
+  title: {fileID: 1999515518}
+  description: {fileID: 261024858}
 --- !u!1 &202277996
 GameObject:
   m_ObjectHideFlags: 0
