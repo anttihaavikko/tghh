@@ -172,6 +172,8 @@ public class World : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) SetTarget();
         if (DevKey.Down(KeyCode.F)) FlyMode();
         if (DevKey.Down(KeyCode.N)) NextLevel();
+        if (DevKey.Down(KeyCode.T)) PassTime(TimeSpan.FromHours(12), 0.2f);
+        if (DevKey.Down(KeyCode.Z)) UpdateMoney(100);
 
         if (Input.anyKeyDown && !started)
         {
@@ -415,6 +417,14 @@ public class World : MonoBehaviour
         if ((!inCapital || money < country.FuelPrice) && fuel <= 0)
         {
             hunter.Bubble.Show("Oh no, I've run (out of fuel)! I think my (hunting) holiday (week) must be (cut short)...");
+            AudioManager.Instance.TargetPitch = 0f;
+            Invoke(nameof(GameOver), 2f);
+            return;
+        }
+        
+        if (time > new TimeSpan(7, 0, 0, 0))
+        {
+            hunter.Bubble.Show("How the (time flies)! It's already (been a week), and I need to get (back to work) from my (hunting holiday)...");
             AudioManager.Instance.TargetPitch = 0f;
             Invoke(nameof(GameOver), 2f);
             return;
