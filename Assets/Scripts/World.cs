@@ -40,6 +40,7 @@ public class World : MonoBehaviour
     [SerializeField] private GameObject stopSellingButton;
     [SerializeField] private GameObject sellCam;
     [SerializeField] private ScoreDisplay score;
+    [SerializeField] private GameObject gameOver;
 
     private Country current;
     private bool flying;
@@ -534,7 +535,7 @@ public class World : MonoBehaviour
     {
         book.Hide();
         endCam.SetActive(true);
-        Debug.Log("GAME OVER!");
+        gameOver.SetActive(true);
     }
 
     private void ShowMenu(Vector3 pos, Country country = null, bool flip = false)
