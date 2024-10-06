@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Game;
 using AnttiStarterKit.Managers;
 using AnttiStarterKit.ScriptableObjects;
 using AnttiStarterKit.Utils;
@@ -38,6 +39,7 @@ public class World : MonoBehaviour
     [SerializeField] private ButtonStyle sellButtonPrefab;
     [SerializeField] private GameObject stopSellingButton;
     [SerializeField] private GameObject sellCam;
+    [SerializeField] private ScoreDisplay score;
 
     private Country current;
     private bool flying;
@@ -213,6 +215,7 @@ public class World : MonoBehaviour
         }
         if (DevKey.Down(KeyCode.T)) PassTime(TimeSpan.FromHours(12), 0.2f);
         if (DevKey.Down(KeyCode.Z)) UpdateMoney(100);
+        if (DevKey.Down(KeyCode.S)) score.Add(100);
 
         if (Input.anyKeyDown && !started)
         {
@@ -261,6 +264,7 @@ public class World : MonoBehaviour
         route.gameObject.SetActive(false);
         ShowMenuAgain();
         zoomCam.SetActive(true);
+        UpdateFuel(0.2f);
     }
 
     private void ShowMenuAgain()
@@ -311,7 +315,7 @@ public class World : MonoBehaviour
         menu.Hide();
         info.Hide();
 
-        var success = TryComplete(TaskType.Track, 5);
+        var success = TryComplete(TaskType.Track, 5, 2.75f);
         hunter.HopAround(4, success);
         
         this.StartCoroutine(() =>
@@ -345,12 +349,16 @@ public class World : MonoBehaviour
         info.ShowWithText(sb.ToString(), delay);
     }
 
-    private bool TryComplete(TaskType type, int buttonIndex)
+    private bool TryComplete(TaskType type, int buttonIndex, float delay = 0f)
     {
         if (book.CanComplete(type, current))
         {
-            book.Complete(type);
-            menu.HideButton(buttonIndex);
+            this.StartCoroutine(() =>
+            {
+                score.Add((level + 1) * money);
+                book.Complete(type);
+                menu.HideButton(buttonIndex);
+            }, delay);
             return true;
         }
 
@@ -375,6 +383,7 @@ public class World : MonoBehaviour
             
             if (success)
             {
+                score.Add((level + 1) * 5 * money);
                 book.Complete(TaskType.Hunt);
                 this.StartCoroutine(() => book.Hide(), 0.7f);
                 this.StartCoroutine(NextLevel, 1.2f);
