@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AnttiStarterKit.Animations;
@@ -27,6 +28,7 @@ public class World : MonoBehaviour
     [SerializeField] private TMP_Text moneyDisplay;
     [SerializeField] private Pulsater moneyPulsater;
     [SerializeField] private EffectCamera effectCamera;
+    [SerializeField] private TMP_Text timeDisplay;
 
     private Country current;
     private bool flying;
@@ -40,6 +42,7 @@ public class World : MonoBehaviour
     private int tank;
 
     private int money = 500;
+    private TimeSpan time = new TimeSpan(0, 6, 0, 0);
 
     private const int TankSize = 250;
 
@@ -49,6 +52,7 @@ public class World : MonoBehaviour
         UpdateFuel();
         
         UpdateMoney();
+        UpdateTime();
         
         current = countries.Random();
         current.Show();
@@ -59,6 +63,27 @@ public class World : MonoBehaviour
         book.Init(countries, level);
         
         hunter.Bubble.Show("Time to do some (hunting)! Where did I put that (notebook) of mine...");
+    }
+
+    private void UpdateTime()
+    {
+        timeDisplay.text = $"Day {time.Days + 1}, <size=20>{time.Hours}:{time.Minutes:D2}</size>";
+    }
+
+    private void PassTime(TimeSpan amount, float duration)
+    {
+        StartCoroutine(PassTimeCoroutine(amount, duration));
+    }
+
+    private IEnumerator PassTimeCoroutine(TimeSpan amount, float duration)
+    {
+        var steps = duration * 20;
+        for (var i = 0; i < steps; i++)
+        {
+            time += amount / steps;
+            UpdateTime();
+            yield return new WaitForSeconds(0.05f);
+        }
     }
 
     private void UpdateFuel(float duration = 0.3f)
@@ -178,6 +203,7 @@ public class World : MonoBehaviour
 
     public void FindTrack()
     {
+        PassTime(TimeSpan.FromMinutes(30), 3f);
         hunter.Read(true);
         
         huntCam.SetActive(true);
@@ -217,6 +243,8 @@ public class World : MonoBehaviour
 
     public void Hunt()
     {
+        PassTime(TimeSpan.FromHours(4), 3f);
+        
         hunter.Read(false);
         huntCam.SetActive(true);
         menu.Hide();
@@ -264,6 +292,9 @@ public class World : MonoBehaviour
         flying = false;
         var distance = Vector3.Distance(mp, hunter.transform.position);
         var delay = Mathf.Max(1.2f, 0.3f * distance);
+        
+        PassTime(TimeSpan.FromHours(distance), delay);
+        
         ConsumeFuel(distance, delay);
         Tweener.MoveToQuad(hunter.transform, mp, delay);
         var landed = hit.Select(h => h.GetComponent<Country>()).Where(c => c != null).ToList();

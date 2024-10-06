@@ -33,7 +33,7 @@ public class Book : MonoBehaviour
             }
         });
 
-        title.text = $"{hunt.Target.Name} {level + 1}/7";
+        title.text = hunt.Target.Name;
         description.text = hunt.Target.Description;
         
         UpdateReminder();
