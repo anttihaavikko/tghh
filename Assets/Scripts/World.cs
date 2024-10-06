@@ -70,6 +70,8 @@ public class World : MonoBehaviour
             new() { Name = "Campylobacter Fetus", Short = "C.Fetus", Description = "This tiny critter prays on cattle. And by extension, it's also a threat to us humans. Protect the cows and get rid of it!" },
             new() { Name = "Borrelia Burgdorferi", Short = "B.Burgdorferi", Description = "Cute name but a nasty little bastard! It spreads lyme disease and other other equally severe diseases." }
         }.RandomOrder().ToList();
+
+        AudioManager.Instance.TargetPitch = 1f;
         
         tank = fuel = TankSize;
         UpdateFuel();
@@ -303,6 +305,12 @@ public class World : MonoBehaviour
                 this.StartCoroutine(NextLevel, 1.2f);
             }
             ShowInfo(success ? $"Successfully hunted ({book.TargetName})!" : "You didn't find anything...");
+
+            if (success)
+            {
+                hunter.Bubble.Show("Here we go, (next target)! I should probably also (sell) this (pelt) somewhere...");
+            }
+            
             this.StartCoroutine(() =>
             {
                 info.Hide();
