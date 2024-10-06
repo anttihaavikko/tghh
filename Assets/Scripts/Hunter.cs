@@ -13,12 +13,20 @@ public class Hunter : MonoBehaviour
     [SerializeField] private ParticleSystem confetti;
     [SerializeField] private EffectCamera effectCamera;
     [SerializeField] private GameObject planeTrail;
+    [SerializeField] private Transform mouth;
     
     private static readonly int HopAnim = Animator.StringToHash("hop");
     private static readonly int ReadAnim = Animator.StringToHash("reading");
     private static readonly int Joy = Animator.StringToHash("joy");
+    
+    private Coroutine mouthOpening;
 
     public SpeechBubble Bubble => bubble;
+
+    private void Start()
+    {
+        bubble.onWord += OpenMouth;
+    }
 
     public void HopAround(int count, bool win)
     {
@@ -34,6 +42,18 @@ public class Hunter : MonoBehaviour
         }
     }
 
+    private void OpenMouth()
+    {
+        OpenMouth(1f);
+    }
+
+    private void OpenMouth(float duration)
+    {
+        if(mouthOpening != default) StopCoroutine(mouthOpening);
+        Tweener.ScaleToBounceOut(mouth, Vector3.one, 0.075f);
+        mouthOpening = this.StartCoroutine(() => Tweener.ScaleToBounceOut(mouth, new Vector3(1, 0, 1), 0.1f), 0.1f * duration);
+    }
+
     private void Update()
     {
         if (DevKey.Down(KeyCode.W)) anim.SetTrigger(Joy);
@@ -41,6 +61,7 @@ public class Hunter : MonoBehaviour
 
     public void ShootConfetti()
     {
+        OpenMouth(3f);
         effectCamera.BaseEffect(0.3f);
         confetti.Play();
     }
