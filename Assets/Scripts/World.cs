@@ -46,6 +46,7 @@ public class World : MonoBehaviour
     private int money = 500;
     private TimeSpan time = new TimeSpan(0, 6, 0, 0);
     private List<HuntTarget> targetList;
+    private bool warnedAboutFuel;
 
     private const int TankSize = 250;
 
@@ -376,6 +377,12 @@ public class World : MonoBehaviour
             hunter.Bubble.Show("Oh no, I've run (out of fuel)! I think my (hunting) holiday (week) must be (cut short)...");
             Invoke(nameof(GameOver), 2f);
             return;
+        }
+        
+        if (fuel < tank * 0.5f && !warnedAboutFuel)
+        {
+            warnedAboutFuel = true;
+            hunter.Bubble.Show("I should probably consider (refueling) the (plane) pretty soon. Don't want to end up stranded...");
         }
         
         ShowInfo(inCapital || country.Visited ? $"Landed in ({country.name.ToUpper()})!" : "Landed in some (UNKNOWN LAND)...\n<size=50>No (cities) nearby...</size>");
