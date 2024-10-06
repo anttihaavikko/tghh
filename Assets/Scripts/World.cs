@@ -60,6 +60,8 @@ public class World : MonoBehaviour
     private readonly List<HuntReward> loot = new();
     private bool selling;
 
+    public int CityRange { get; set; } = 1;
+
     private const int TankSize = 250;
 
     private void Start()
@@ -476,7 +478,7 @@ public class World : MonoBehaviour
             current.Hide();
         }
 
-        inCapital = Vector3.Distance(pos, closest.CapitalPosition) < 0.5f;
+        inCapital = Vector3.Distance(pos, closest.CapitalPosition) < 0.5f * CityRange;
         var flipped = inCapital && pos.x - closest.CapitalPosition.x > 0;
         this.StartCoroutine(() =>
         {
@@ -524,7 +526,7 @@ public class World : MonoBehaviour
         }
         
         ShowInfo(inCapital || country.Visited ? $"Landed in ({country.name.ToUpper()})!" : "Landed in some (UNKNOWN LAND)...\n<size=50>No (cities) nearby...</size>");
-        ShowMenu(inCapital ? country.CapitalPosition : hunter.transform.position, country, flipped);
+        ShowMenu(hunter.transform.position, country, flipped);
     }
 
     private void GameOver()

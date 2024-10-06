@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using AnttiStarterKit.Animations;
+using AnttiStarterKit.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -42,11 +44,14 @@ public class Country : MonoBehaviour
 
     private Bribe GetRandomBribe()
     {
-        return new Bribe
+        return new List<Bribe>
         {
-            Description = $"(The {nationality} Embassy) does something or other...",
-            Effect = (world, country) => Debug.Log($"Bribed {country.name}")
-        };
+            new()
+            {
+                Description = $"(The {nationality} Embassy) increases the (range) where you can access (cities) after landing close by.",
+                Effect = (world, country) => world.CityRange++
+            }
+        }.Random();
     }
 
     public void Bribe(World word)
@@ -65,6 +70,7 @@ public class Country : MonoBehaviour
 
     public void Hide()
     {
+        if (IsBribed) return;
         capitalText.Hide();
         capitalTap.HideWithDelay();
     }
