@@ -30,6 +30,7 @@ public class World : MonoBehaviour
     [SerializeField] private Pulsater moneyPulsater;
     [SerializeField] private EffectCamera effectCamera;
     [SerializeField] private TMP_Text timeDisplay;
+    [SerializeField] private GameObject endCam;
 
     private Country current;
     private bool flying;
@@ -139,6 +140,12 @@ public class World : MonoBehaviour
     {
         fuel = Mathf.Max(0, fuel - GetFuelConsumption(distance));
         UpdateFuel(duration);
+    }
+
+    private Vector3 AdjustDistance(Vector3 dir)
+    {
+        var consumption = GetFuelConsumption(dir.magnitude);
+        return fuel >= consumption ? dir : dir * fuel / consumption;
     }
 
     private void NextLevel()
@@ -314,22 +321,26 @@ public class World : MonoBehaviour
         if (!flying || cancelButton.IsHovered) return;
         cancelButton.gameObject.SetActive(false);
         info.Hide();
+        
         var mp = cam.ScreenToWorldPoint(Input.mousePosition).WhereZ(0);
-        var hit = Physics2D.OverlapCircleAll(mp, 0.1f, countryMask);
+        var dir = AdjustDistance(mp - hunter.transform.position);
+        var distance = dir.magnitude;
+        var delay = Mathf.Max(1.2f, 0.3f * distance);
+        var pos = hunter.transform.position + dir;
+        
+        var hit = Physics2D.OverlapCircleAll(pos, 0.1f, countryMask);
         if (!hit.Any()) return;
         flying = false;
-        var distance = Vector3.Distance(mp, hunter.transform.position);
-        var delay = Mathf.Max(1.2f, 0.3f * distance);
         
         PassTime(TimeSpan.FromHours(distance), delay);
         
         ConsumeFuel(distance, delay);
-        Tweener.MoveToQuad(hunter.transform, mp, delay);
+        Tweener.MoveToQuad(hunter.transform, pos, delay);
         var landed = hit.Select(h => h.GetComponent<Country>()).Where(c => c != null).ToList();
-        var closest = landed.OrderBy(c => Vector3.Distance(mp, c.CapitalPosition)).First();
+        var closest = landed.OrderBy(c => Vector3.Distance(pos, c.CapitalPosition)).First();
         
         zoomCam.SetActive(true);
-        hunter.Lift(mp);
+        hunter.Lift(pos);
         
         hunter.ScaleUp(delay * 0.3f);
         this.StartCoroutine(() => hunter.ScaleDown(delay * 0.3f), delay * 0.7f);
@@ -339,16 +350,15 @@ public class World : MonoBehaviour
             current.Hide();
         }
 
-        inCapital = Vector3.Distance(mp, closest.CapitalPosition) < 0.5f;
-        var flipped = inCapital && mp.x - closest.CapitalPosition.x > 0;
+        inCapital = Vector3.Distance(pos, closest.CapitalPosition) < 0.5f;
+        var flipped = inCapital && pos.x - closest.CapitalPosition.x > 0;
         this.StartCoroutine(() =>
         {
             if(wasBookShown) book.Show();
             hunter.Land();
             
             route.gameObject.SetActive(false);
-            ShowInfo(inCapital || closest.Visited ? $"Landed in ({closest.name.ToUpper()})!" : "Landed in some (UNKNOWN LAND)...\n<size=50>No (cities) nearby...</size>", 0.3f);
-            this.StartCoroutine(() => ShowMenu(inCapital ? closest.CapitalPosition : hunter.transform.position, closest, flipped), 0.5f);
+            this.StartCoroutine(() => PostLanding(closest, flipped), 0.5f);
         }, delay);
         
         if (inCapital)
@@ -357,6 +367,26 @@ public class World : MonoBehaviour
         }
         
         current = closest;
+    }
+
+    private void PostLanding(Country country, bool flipped)
+    {
+        if ((!inCapital || money < country.FuelPrice) && fuel <= 0)
+        {
+            hunter.Bubble.Show("Oh no, I've run (out of fuel)! I think my (hunting) holiday (week) must be (cut short)...");
+            Invoke(nameof(GameOver), 2f);
+            return;
+        }
+        
+        ShowInfo(inCapital || country.Visited ? $"Landed in ({country.name.ToUpper()})!" : "Landed in some (UNKNOWN LAND)...\n<size=50>No (cities) nearby...</size>");
+        ShowMenu(inCapital ? country.CapitalPosition : hunter.transform.position, country, flipped);
+    }
+
+    private void GameOver()
+    {
+        book.Hide();
+        endCam.SetActive(true);
+        Debug.Log("GAME OVER!");
     }
 
     private void ShowMenu(Vector3 pos, Country country = null, bool flip = false)
