@@ -6,6 +6,7 @@ using System.Text;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Managers;
+using AnttiStarterKit.ScriptableObjects;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Visuals;
 using TMPro;
@@ -32,6 +33,7 @@ public class World : MonoBehaviour
     [SerializeField] private EffectCamera effectCamera;
     [SerializeField] private TMP_Text timeDisplay;
     [SerializeField] private GameObject endCam;
+    [SerializeField] private SoundComposition buySound;
 
     private Country current;
     private bool flying;
@@ -48,6 +50,7 @@ public class World : MonoBehaviour
     private TimeSpan time = new TimeSpan(0, 6, 0, 0);
     private List<HuntTarget> targetList;
     private bool warnedAboutFuel;
+    private bool toldAboutHunt;
 
     private const int TankSize = 250;
 
@@ -86,8 +89,11 @@ public class World : MonoBehaviour
         this.StartCoroutine(() => physicsDecorations.SetParent(null), 0.25f);
         
         book.Init(countries, targetList, level);
-        
-        hunter.Bubble.Show("Time to do some (hunting)! Where did I put that (notebook) of mine...");
+
+        this.StartCoroutine(() =>
+        {
+            hunter.Bubble.Show("Time to do some (hunting)! Where did I put that (notebook) of mine...");
+        }, 1f);
     }
 
     private void UpdateTime()
@@ -185,15 +191,22 @@ public class World : MonoBehaviour
             effectCamera.BaseEffect(0.2f);
             hunter.Bubble.Show("I don't have (enough funds) to do that...");
             AudioManager.Instance.TargetPitch = 0.8f;
+            PlayNoAfford();
             return;
         }
         
+        PlayBuySound();
         AudioManager.Instance.TargetPitch = 1f;
         UpdateMoney(-current.FuelPrice);
         
         menu.HideButton(1);
         fuel = tank;
         UpdateFuel();
+    }
+
+    private void PlayNoAfford()
+    {
+        AudioManager.Instance.PlayEffectAt(7, transform.position, 2f);
     }
 
     public void CancelFlyMode()
@@ -229,11 +242,18 @@ public class World : MonoBehaviour
         {
             effectCamera.BaseEffect(0.2f);
             hunter.Bubble.Show("I don't have (enough funds) to do that...");
+            PlayNoAfford();
             return;
         }
         
+        PlayBuySound();
         UpdateMoney(-current.TrapPrice);
         TryComplete(TaskType.Trap, 3);
+    }
+
+    private void PlayBuySound()
+    {
+        buySound.Play(transform.position, 2f);
     }
 
     public void FindTrack()
@@ -252,7 +272,7 @@ public class World : MonoBehaviour
         {
             if (success)
             {
-                ShowInfo($"Found the track of ({book.TargetName})!");
+                ShowInfo($"Found the track of ({book.TargetName})!", 0.5f);
             }
             
             this.StartCoroutine(() =>
@@ -260,6 +280,13 @@ public class World : MonoBehaviour
                 info.Hide();
                 menu.Show(book, current, inCapital, isMenuFlipped);
                 huntCam.SetActive(false);
+
+                if (success && !toldAboutHunt)
+                {
+                    toldAboutHunt = true;
+                    hunter.Bubble.Show($"Right, now I gotta go after the (main target) of the hunt, {book.TargetName}!");
+                }
+                
             }, 1.5f);
         }, 2f);
     }
@@ -304,11 +331,11 @@ public class World : MonoBehaviour
                 this.StartCoroutine(() => book.Hide(), 0.7f);
                 this.StartCoroutine(NextLevel, 1.2f);
             }
-            ShowInfo(success ? $"Successfully hunted ({book.TargetName})!" : "You didn't find anything...");
+            ShowInfo(success ? $"Successfully hunted ({book.TargetName})!" : "You didn't find anything...", 0.5f);
 
             if (success)
             {
-                hunter.Bubble.Show("Here we go, (next target)! I should probably also (sell) this (pelt) somewhere...");
+                this.StartCoroutine(() => hunter.Bubble.Show("Here we go, (next target)! I should probably also (sell) this (pelt) somewhere..."), 1f);
             }
             
             this.StartCoroutine(() =>
@@ -398,7 +425,7 @@ public class World : MonoBehaviour
             if (!warnedAboutFuel)
             {
                 warnedAboutFuel = true;
-                hunter.Bubble.Show("I should probably consider (refueling) the (plane) pretty soon. Don't want to end up stranded...");   
+                hunter.Bubble.Show("I should probably consider (refueling) the (plane) pretty soon. Don't want to end up (stranded)...");   
             }
             AudioManager.Instance.TargetPitch = 0.9f;
         }

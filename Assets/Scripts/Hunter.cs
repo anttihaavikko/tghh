@@ -2,6 +2,7 @@ using System;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
 using AnttiStarterKit.Managers;
+using AnttiStarterKit.ScriptableObjects;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Visuals;
 using UnityEngine;
@@ -15,18 +16,26 @@ public class Hunter : MonoBehaviour
     [SerializeField] private EffectCamera effectCamera;
     [SerializeField] private GameObject planeTrail;
     [SerializeField] private Transform mouth;
+    [SerializeField] private SoundComposition confettiSound;
     
     private static readonly int HopAnim = Animator.StringToHash("hop");
     private static readonly int ReadAnim = Animator.StringToHash("reading");
     private static readonly int Joy = Animator.StringToHash("joy");
     
     private Coroutine mouthOpening;
+    private bool flying;
 
     public SpeechBubble Bubble => bubble;
 
     private void Start()
     {
         bubble.onWord += OpenMouth;
+        bubble.onWord += Talk;
+    }
+
+    private void Talk()
+    {
+        AudioManager.Instance.PlayEffectAt(8, mouth.transform.position, 1.5f);
     }
 
     public void HopAround(int count, bool win)
@@ -35,12 +44,21 @@ public class Hunter : MonoBehaviour
         {
             if (win && i == count - 1)
             {
-                this.StartCoroutine(() => anim.SetTrigger(Joy), i * 0.8f);
+                this.StartCoroutine(() =>
+                {
+                    JumpSound();
+                    anim.SetTrigger(Joy);
+                }, i * 0.8f);
                 continue;
             }
             var target = i < count - 1 ? Vector3.zero.RandomOffset(0.3f) : Vector3.zero;
             this.StartCoroutine(() => HopTo(target), i * 0.8f);
         }
+    }
+
+    private void JumpSound()
+    {
+        AudioManager.Instance.PlayEffectAt(1, transform.position, 3f);
     }
 
     private void OpenMouth()
@@ -62,6 +80,7 @@ public class Hunter : MonoBehaviour
 
     public void ShootConfetti()
     {
+        confettiSound.Play(transform.position, 1.5f);
         OpenMouth(3f);
         effectCamera.BaseEffect(0.3f);
         confetti.Play();
@@ -75,11 +94,15 @@ public class Hunter : MonoBehaviour
 
     public void Hop()
     {
+        JumpSound();
         anim.SetTrigger(HopAnim);
     }
 
     public void Lift(Vector3 target)
     {
+        flying = true;
+        PlayFlyingSounds();
+        
         AudioManager.Instance.TargetPitch = 1.1f;
         AudioManager.Instance.Highpass(false);
         AudioManager.Instance.Lowpass();
@@ -95,6 +118,12 @@ public class Hunter : MonoBehaviour
         plane.Show();
     }
 
+    private void PlayFlyingSounds()
+    {
+        AudioManager.Instance.PlayEffectAt(0, transform.position, 2f);
+        if(flying) Invoke(nameof(PlayFlyingSounds), 0.1f);
+    }
+
     public void ScaleUp(float duration)
     {
         Tweener.ScaleTo(transform, Vector3.one * 1.3f, duration, TweenEasings.QuadraticEaseInOut);
@@ -102,6 +131,7 @@ public class Hunter : MonoBehaviour
 
     public void ScaleDown(float duration)
     {
+        flying = false;
         Tweener.ScaleTo(transform, Vector3.one, duration, TweenEasings.QuadraticEaseInOut);
         this.StartCoroutine(Hop, duration - 0.3f);
     }

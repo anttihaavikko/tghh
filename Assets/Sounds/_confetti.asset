@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc3c62a61c64e6b8fb81ac647261eee, type: 3}
+  m_Name: _confetti
+  m_EditorClassIdentifier: 
+  rows:
+  - clip: {fileID: 8300000, guid: 26d4a66ec3b684bdda60670faa5546f7, type: 3}
+    volume: 2.6
+  - clip: {fileID: 8300000, guid: 8e8c3592df94941f0a012a49f69ac568, type: 3}
+    volume: 0.8
+  - clip: {fileID: 8300000, guid: ee16b59870496452d8c48745245696ee, type: 3}
+    volume: 1.23
+  collections: []
