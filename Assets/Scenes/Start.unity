@@ -11156,17 +11156,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7928942227317443043, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
   m_PrefabInstance: {fileID: 1052878377}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1052878380 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7928942227317443046, guid: 9b057923d305c4b0797032216a0b3b01, type: 3}
-  m_PrefabInstance: {fileID: 1052878377}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1052878379}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27cb8ba540e4f4c1498070cb0c61d316, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1052878381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20735,7 +20724,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1804120741}
-  - component: {fileID: 1804120742}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -20764,95 +20752,6 @@ Transform:
   m_Father: {fileID: 1238365529}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1804120742
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1804120740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 456f33941bcd42169f4930c4ef598461, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hunter: {fileID: 1892348741}
-  countries:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  countryMask:
-    serializedVersion: 2
-    m_Bits: 64
-  cam: {fileID: 1077409069}
-  zoomCam: {fileID: 177777010}
-  menu: {fileID: 0}
-  huntCam: {fileID: 2113665971}
-  route: {fileID: 0}
-  book: {fileID: 0}
-  info: {fileID: 1957869433}
-  physicsDecorations: {fileID: 1647726862}
-  cancelButton: {fileID: 1052878380}
-  fuelDisplay: {fileID: 0}
-  fuelBar: {fileID: 0}
-  fuelPreview: {fileID: 0}
-  moneyDisplay: {fileID: 0}
-  moneyPulsater: {fileID: 0}
-  effectCamera: {fileID: 1077409070}
-  timeDisplay: {fileID: 0}
-  endCam: {fileID: 1467785359}
-  buySound: {fileID: 11400000, guid: 86c9dd17a1e8b4def9f680733cb05e6a, type: 2}
-  lootContainer: {fileID: 0}
-  sellButtonPrefab: {fileID: 5278388934408137400, guid: 8a8c7d3cb1210436f914762d6a3e8264, type: 3}
-  stopSellingButton: {fileID: 0}
-  sellCam: {fileID: 583663525}
-  score: {fileID: 0}
-  gameOver: {fileID: 0}
-  scoreManager: {fileID: 0}
 --- !u!1 &1827978766
 GameObject:
   m_ObjectHideFlags: 0
