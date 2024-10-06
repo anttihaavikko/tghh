@@ -249,6 +249,8 @@ public class World : MonoBehaviour
         menu.HideButton(1);
         fuel = tank;
         UpdateFuel();
+        
+        ShowMenuAgain();
     }
 
     private void PlayNoAfford()
@@ -272,7 +274,7 @@ public class World : MonoBehaviour
 
     private void ShowMenuAgain()
     {
-        menu.Show(book, current, inCapital, isMenuFlipped, loot.Any());
+        menu.Show(book, current, inCapital, isMenuFlipped, loot.Any(), fuel > 0);
     }
 
     public void FlyMode()
@@ -348,7 +350,7 @@ public class World : MonoBehaviour
             this.StartCoroutine(() =>
             {
                 info.Hide();
-                menu.Show(book, current, inCapital, isMenuFlipped, loot.Any());
+                menu.Show(book, current, inCapital, isMenuFlipped, loot.Any(), fuel > 0);
                 huntCam.SetActive(false);
 
                 if (success && !toldAboutHunt)
@@ -422,7 +424,7 @@ public class World : MonoBehaviour
             this.StartCoroutine(() =>
             {
                 info.Hide();
-                menu.Show(book, current, inCapital, isMenuFlipped, loot.Any());
+                menu.Show(book, current, inCapital, isMenuFlipped, loot.Any(), fuel > 0);
                 huntCam.SetActive(false);
             }, 1.5f);
         }, 2f);
@@ -542,7 +544,7 @@ public class World : MonoBehaviour
     {
         isMenuFlipped = flip;
         menu.transform.position = pos;
-        menu.Show(book, country, inCapital, flip, loot.Any());
+        menu.Show(book, country, inCapital, flip, loot.Any(), fuel > 0);
     }
 
     public void RevealCitiesAround(Country country, float radius)

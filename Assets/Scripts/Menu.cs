@@ -10,7 +10,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private List<ActionButton> buttons;
     [SerializeField] private Hunter hunter;
     
-    public void Show(Book book, Country country, bool inCapital, bool flip, bool canSell)
+    public void Show(Book book, Country country, bool inCapital, bool flip, bool canSell, bool canFly)
     {
         if (country != null)
         {
@@ -20,6 +20,7 @@ public class Menu : MonoBehaviour
             buttons[3].SetPrice(country.TrapPrice);
             buttons[4].SetSecondaryLine($"{country.PriceModifier}% sell value");
         }
+        buttons[0].gameObject.SetActive(canFly);
         buttons[1].gameObject.SetActive(inCapital);
         buttons[2].gameObject.SetActive(inCapital && country != null && !country.IsBribed); // bribe
         buttons[3].gameObject.SetActive(inCapital && book.HasUncompleted(TaskType.Trap) && country != null && (country.HasTraps || book.CanComplete(TaskType.Trap, country)));
