@@ -22,7 +22,7 @@ public class Menu : MonoBehaviour
         }
         buttons[1].gameObject.SetActive(inCapital);
         buttons[2].gameObject.SetActive(inCapital && country != null && !country.IsBribed); // bribe
-        buttons[3].gameObject.SetActive(inCapital && book.HasUncompleted(TaskType.Trap) && country != null && book.CanComplete(TaskType.Trap, country));
+        buttons[3].gameObject.SetActive(inCapital && book.HasUncompleted(TaskType.Trap) && country != null && (country.HasTraps || book.CanComplete(TaskType.Trap, country)));
         buttons[4].gameObject.SetActive(canSell); // sell
         buttons[5].gameObject.SetActive(book.HasUncompleted(TaskType.Track));
         

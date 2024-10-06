@@ -58,6 +58,7 @@ public class HuntTask
 
     public bool FilledBy(Country candidate)
     {
+        if (type == TaskType.Trap && candidate.HasTraps) return true;
         return country.All(letter => candidate.name.ToUpper().Contains(letter)) && city.All(letter => candidate.CapitalName.ToUpper().Contains(letter));
     }
 

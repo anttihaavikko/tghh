@@ -32,6 +32,7 @@ public class Country : MonoBehaviour
 
     public bool Visited { get; private set; }
     public bool IsBribed { get; private set; }
+    public bool HasTraps { get; set; }
 
     public int FuelPrice => Mathf.CeilToInt(priceModifier * 100) * fuelPriceMod;
     public int TrapPrice => Mathf.CeilToInt(priceModifier * 20);
@@ -77,6 +78,11 @@ public class Country : MonoBehaviour
             {
                 Description = $"(The {nationality} Embassy) will (double) all your future (score gains).",
                 Effect = (world, country) => world.IncreaseMultiplier()
+            },
+            new()
+            {
+                Description = $"(The {nationality} Embassy) can always sell you a (correct trap), no matter the (task) in hand.",
+                Effect = (world, country) => country.HasTraps = true
             }
         }.Random();
     }
