@@ -165,6 +165,14 @@ public class World : MonoBehaviour
 
     public void BuyTrap()
     {
+        if (money < current.TrapPrice)
+        {
+            effectCamera.BaseEffect(0.2f);
+            hunter.Bubble.Show("I don't have (enough funds) to do that...");
+            return;
+        }
+        
+        UpdateMoney(-current.TrapPrice);
         TryComplete(TaskType.Trap, 3);
     }
 

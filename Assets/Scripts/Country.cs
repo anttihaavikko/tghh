@@ -16,8 +16,9 @@ public class Country : MonoBehaviour
     public Vector3 CapitalPosition => capital.position;
 
     public bool Visited { get; private set; }
-    public float PriceModifier => priceModifier;
+
     public int FuelPrice => Mathf.CeilToInt(priceModifier * 100);
+    public int TrapPrice => Mathf.CeilToInt(priceModifier * 20);
 
     private void Start()
     {
