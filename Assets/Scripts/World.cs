@@ -10,6 +10,7 @@ using AnttiStarterKit.Managers;
 using AnttiStarterKit.ScriptableObjects;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Visuals;
+using Leaderboards;
 using TMPro;
 using UnityEngine;
 
@@ -41,6 +42,7 @@ public class World : MonoBehaviour
     [SerializeField] private GameObject sellCam;
     [SerializeField] private ScoreDisplay score;
     [SerializeField] private GameObject gameOver;
+    [SerializeField] private ScoreManager scoreManager;
 
     private Country current;
     private bool flying;
@@ -222,6 +224,7 @@ public class World : MonoBehaviour
 
         if (Input.anyKeyDown && !started)
         {
+            sellCam.SetActive(false);
             started = true;
             var letters = book.FirstTaskLetters;
             hunter.Read(true);
@@ -274,7 +277,7 @@ public class World : MonoBehaviour
 
     private void ShowMenuAgain()
     {
-        menu.Show(book, current, inCapital, isMenuFlipped, loot.Any(), fuel > 0);
+        menu.Show(book, current, inCapital, isMenuFlipped, loot.Any(), fuel > 0, fuel < tank);
     }
 
     public void FlyMode()
@@ -350,7 +353,7 @@ public class World : MonoBehaviour
             this.StartCoroutine(() =>
             {
                 info.Hide();
-                menu.Show(book, current, inCapital, isMenuFlipped, loot.Any(), fuel > 0);
+                menu.Show(book, current, inCapital, isMenuFlipped, loot.Any(), fuel > 0, fuel < tank);
                 huntCam.SetActive(false);
 
                 if (success && !toldAboutHunt)
@@ -424,7 +427,7 @@ public class World : MonoBehaviour
             this.StartCoroutine(() =>
             {
                 info.Hide();
-                menu.Show(book, current, inCapital, isMenuFlipped, loot.Any(), fuel > 0);
+                menu.Show(book, current, inCapital, isMenuFlipped, loot.Any(), fuel > 0, fuel < tank);
                 huntCam.SetActive(false);
             }, 1.5f);
         }, 2f);
@@ -535,6 +538,9 @@ public class World : MonoBehaviour
 
     private void GameOver()
     {
+        var plr = PlayerPrefs.GetString("PlayerName", "Anon");
+        var id = PlayerPrefs.GetString("PlayerId", Guid.NewGuid().ToString());
+        scoreManager.SubmitScore(plr, score.Total, level, id);
         book.Hide();
         endCam.SetActive(true);
         gameOver.SetActive(true);
@@ -544,7 +550,7 @@ public class World : MonoBehaviour
     {
         isMenuFlipped = flip;
         menu.transform.position = pos;
-        menu.Show(book, country, inCapital, flip, loot.Any(), fuel > 0);
+        menu.Show(book, country, inCapital, flip, loot.Any(), fuel > 0, fuel < tank);
     }
 
     public void RevealCitiesAround(Country country, float radius)

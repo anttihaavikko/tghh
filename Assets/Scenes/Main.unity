@@ -7135,7 +7135,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 1.21
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -7158,7 +7158,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0.019488899, y: -0.000000017236685, z: -3.359878e-10, w: 0.9998101}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -22359,6 +22359,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39d1cfef6e3348439afd201124826062, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1399129999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1399130001}
+  - component: {fileID: 1399130000}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1399130000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399129999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43ae22459f014753a8bc8cc75fc8345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameName: tghh
+  perPage: 0
+--- !u!4 &1399130001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399129999}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1418741437 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5743448858974141537, guid: 3b72ca9bcf8ae460f91a8e61f283a7d8, type: 3}
@@ -22475,6 +22521,7 @@ MonoBehaviour:
   sellCam: {fileID: 1809790735}
   score: {fileID: 1153931570}
   gameOver: {fileID: 1562024168}
+  scoreManager: {fileID: 1399130000}
 --- !u!4 &1433259712
 Transform:
   m_ObjectHideFlags: 0
@@ -29220,7 +29267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1809790736
 Transform:
   m_ObjectHideFlags: 0
@@ -29228,7 +29275,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809790735}
-  m_LocalRotation: {x: -0.019488899, y: -0.000000017171379, z: -3.3471487e-10, w: 0.9998101}
+  m_LocalRotation: {x: -0.019488899, y: -0.000000017236685, z: -3.359878e-10, w: 0.9998101}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
