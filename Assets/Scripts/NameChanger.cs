@@ -13,10 +13,11 @@ public class NameChanger : MonoBehaviour
         
         field.text = PlayerPrefs.GetString("PlayerName", "Anon");
         field.onEndEdit.AddListener(Change);
+        field.onSelect.AddListener(HideHelp);
         if(field.text != "Anon") HideHelp();
     }
 
-    public void HideHelp()
+    public void HideHelp(string a = null)
     {
         if(help) help.SetActive(false);    
     }
