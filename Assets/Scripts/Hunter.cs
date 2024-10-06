@@ -1,6 +1,7 @@
 using System;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Visuals;
 using UnityEngine;
@@ -79,6 +80,10 @@ public class Hunter : MonoBehaviour
 
     public void Lift(Vector3 target)
     {
+        AudioManager.Instance.TargetPitch = 1.1f;
+        AudioManager.Instance.Highpass(false);
+        AudioManager.Instance.Lowpass();
+        
         planeTrail.SetActive(true);
         
         Hop();
@@ -103,6 +108,8 @@ public class Hunter : MonoBehaviour
 
     public void Land()
     {
+        AudioManager.Instance.TargetPitch = 1f;
+        AudioManager.Instance.Lowpass(false);
         plane.Hide();
         this.StartCoroutine(() => planeTrail.SetActive(false), 3f);
     }

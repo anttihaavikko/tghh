@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using AnttiStarterKit.Animations;
 using AnttiStarterKit.Extensions;
+using AnttiStarterKit.Managers;
 using AnttiStarterKit.Utils;
 using AnttiStarterKit.Visuals;
 using TMPro;
@@ -181,9 +182,11 @@ public class World : MonoBehaviour
         {
             effectCamera.BaseEffect(0.2f);
             hunter.Bubble.Show("I don't have (enough funds) to do that...");
+            AudioManager.Instance.TargetPitch = 0.8f;
             return;
         }
         
+        AudioManager.Instance.TargetPitch = 1f;
         UpdateMoney(-current.FuelPrice);
         
         menu.HideButton(1);
@@ -193,6 +196,7 @@ public class World : MonoBehaviour
 
     public void CancelFlyMode()
     {
+        AudioManager.Instance.Highpass(false);
         info.Hide();
         cancelButton.Reset();
         cancelButton.gameObject.SetActive(false);
@@ -205,6 +209,7 @@ public class World : MonoBehaviour
 
     public void FlyMode()
     {
+        AudioManager.Instance.Highpass();
         hunter.Read(false);
         cancelButton.gameObject.SetActive(true);
         wasBookShown = book.IsShown;
@@ -375,14 +380,19 @@ public class World : MonoBehaviour
         if ((!inCapital || money < country.FuelPrice) && fuel <= 0)
         {
             hunter.Bubble.Show("Oh no, I've run (out of fuel)! I think my (hunting) holiday (week) must be (cut short)...");
+            AudioManager.Instance.TargetPitch = 0f;
             Invoke(nameof(GameOver), 2f);
             return;
         }
         
-        if (fuel < tank * 0.5f && !warnedAboutFuel)
+        if (fuel < tank * 0.5f)
         {
-            warnedAboutFuel = true;
-            hunter.Bubble.Show("I should probably consider (refueling) the (plane) pretty soon. Don't want to end up stranded...");
+            if (!warnedAboutFuel)
+            {
+                warnedAboutFuel = true;
+                hunter.Bubble.Show("I should probably consider (refueling) the (plane) pretty soon. Don't want to end up stranded...");   
+            }
+            AudioManager.Instance.TargetPitch = 0.9f;
         }
         
         ShowInfo(inCapital || country.Visited ? $"Landed in ({country.name.ToUpper()})!" : "Landed in some (UNKNOWN LAND)...\n<size=50>No (cities) nearby...</size>");

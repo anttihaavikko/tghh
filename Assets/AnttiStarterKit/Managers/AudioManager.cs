@@ -14,8 +14,8 @@ namespace AnttiStarterKit.Managers
 		private float musVolume = 0.5f;
 		public AudioClip[] effects;
 
-		private AudioLowPassFilter lowpass;
-		private AudioHighPassFilter highpass;
+		[SerializeField] private AudioLowPassFilter lowpass;
+		[SerializeField] private AudioHighPassFilter highpass;
 
 		public float TargetPitch { get; set; } = 1f;
 
