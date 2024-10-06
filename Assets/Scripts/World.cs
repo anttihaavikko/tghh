@@ -302,6 +302,7 @@ public class World : MonoBehaviour
         UpdateMoney(-current.BribePrice);
         current.Bribe(this);
         menu.HideButton(2);
+        ShowMenuAgain();
     }
 
     public void BuyTrap()

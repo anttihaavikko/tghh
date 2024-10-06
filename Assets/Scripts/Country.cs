@@ -83,7 +83,7 @@ public class Country : MonoBehaviour
 
     public void Hide()
     {
-        if (IsBribed && revealed) return;
+        if (IsBribed || revealed) return;
         capitalText.Hide();
         capitalTap.HideWithDelay();
     }
